@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+  <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen"/>
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print"/>
+
+  <title>Rtanque</title>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <h1>Rtanque</h1>
+
+    <h2></h2>
+  </div>
+</header>
+
+<div class="container">
+  <section id="main_content">
+    <h1><a href="https://docs.google.com/forms/d/11wYOq1lO3DQLsi_aB98aZj3Oa1EDVsVHNE7jUFUE9xQ/viewform#start=embed">Signup
+      for the Madrid.rb Battle</a></h1>
+
+    <p>Create a <em>private/secret</em> gist with your bot code</p>
+
+    <img src="https://raw.github.com/awilliams/RTanque/master/screenshots/battle_1.png">
+
+    <h2>Requirements</h2>
+
+    <ul>
+      <li>The <a href="https://github.com/jlnr/gosu">Gosu</a> library used for rendering has some dependencies. Use the
+        <a href="https://github.com/jlnr/gosu/wiki/Getting-Started-on-Linux">Gosu getting started</a> to resolve any for
+        your system.
+      </li>
+      <li>Ruby 1.9.3 (tested on 1.8.7 and 1.9.2)</li>
+    </ul>
+
+    <h2>Usage</h2>
+
+    <p>Make a project directory, init bundler, add the RTanque gem, and create a bot:</p>
+
+<pre><code>$ mkdir -p rtanque/bots; cd rtanque
+  $ bundle init
+  $ echo "gem 'rtanque', :github =&gt; 'awilliams/RTanque'" &gt;&gt; Gemfile
+  $ bundle
+  $ bundle exec rtanque init my_bot
+  $ bundle exec rtanque start sample_bots/keyboard bots/my_bot
+</code></pre>
+
+    <h2>Bot API</h2>
+
+    <p>The tank api consists of reading input from Brain#sensors and giving output to Brain#command</p>
+
+<pre><code>class Bot < RTanque::Bot::Brain
+  # RTanque::Bot::Sensors =
+  #  Struct.new(:ticks, :health, :speed, :position, :heading, :radar, :turret)
+  def tick!
+    sensors.ticks # Integer
+    sensors.health # Float
+    sensors.position # RTanque::Point
+    sensors.heading # RTanque::Heading
+    sensors.speed # Float
+    sensors.radar_heading # RTanque::Heading
+    sensors.turret_heading # RTanque::Heading
+    sensors.radar.each do |scanned_bot|
+      # RTanque::Bot::Radar::Reflection
+      # Reflection(:heading, :distance, :name)
+    end
+  end
+end
+</code></pre>
+
+<pre><code>class Bot < RTanque::Bot::Brain
+  # RTanque::Bot::Command =
+  #  Struct.new(:speed, :heading, :radar_heading, :turret_heading, :fire_power)
+  def tick!
+    command.speed = 1
+    command.heading = Math::PI
+    command.radar_heading = Math::PI
+    command.turret_heading = Math::PI
+    command.fire(3)
+  end
+end
+</code></pre>
+
+    <h2>More Info</h2>
+
+    <ul>
+      <li><a href="https://github.com/awilliams/RTanque">Github page</a></li>
+      <li><a href="http://robocode.sourceforge.net/">Robocode (original Java game)</a></li>
+    </ul>
+
+  </section>
+</div>
+
+</body>
+</html>
