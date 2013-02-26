@@ -1,0 +1,10 @@
+class <%= @bot_class_name %> < RTanque::Bot::Brain
+  include RTanque::Bot::BrainHelper
+  NAME = '<%= @bot_name %>'
+
+  def tick!
+    ## main logic goes here
+    # use self.sensors to detect things
+    # use self.command to control tank
+  end
+end

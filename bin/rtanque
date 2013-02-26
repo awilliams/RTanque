@@ -1,0 +1,110 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'thor'
+require 'rtanque'
+require 'rtanque/gui'
+$LOAD_PATH << Dir.pwd
+$LOAD_PATH << File.expand_path('../../', __FILE__)
+
+class RTanqueCLI < Thor
+  include Thor::Actions
+
+  source_root(File.expand_path('../../', __FILE__))
+
+  desc "start <path_to_brain> <path_to_brain> ...", "Start match"
+  method_option :width, :aliases => '-w', :default => 1200, :type => :numeric, :banner => 'width of window'
+  method_option :height, :aliases => '-h', :default => 800, :type => :numeric, :banner => 'height of window'
+  method_option :gui, :default => true, :type => :boolean
+  method_option :gc, :aliasies => '-garbagecollection', :default => true, :type => :boolean
+  def start(*bots)
+    if bots.empty?
+      say "Provide paths to brains", :red
+      say "rtanque start path/to/brain1 path/to/brain2 ...", :yellow
+      exit 1
+    end
+    say_status 'GUI', options[:gui], :yellow
+    say_status 'Window', "#{options[:width]}x#{options[:height]}", :yellow
+    say_status 'GarbageCollection', "#{options[:gc] ? 'yes' : 'no'}", :yellow
+    brains = get_brains(*bots)
+    self.print_brains(brains)
+
+    arena = RTanque::Arena.new(options[:width], options[:height])
+    match = RTanque::Match.new(arena)
+
+    tanks = self.get_bots(arena, brains.values)
+    say "No Brains found", :red and exit(1) if tanks.empty?
+    match.add_bots(tanks)
+
+    if options[:gui]
+      window = RTanque::Gui::Window.new(match)
+      trap(:INT) { window.close }
+      self.control_gc(options[:gc]) { window.show }
+    else
+      match.start
+      trap(:INT) { match.stop }
+    end
+  end
+
+  desc "init bot_name", "Creates a bot brain template"
+  def init(bot_name)
+    @bot_name = bot_name
+    @bot_class_name = Thor::Util.camel_case(bot_name)
+    template('templates/bot.erb', "bots/#{Thor::Util.snake_case(bot_name)}.rb")
+  end
+
+  protected
+
+  def control_gc(gc = true)
+    if gc
+      yield
+    else
+      GC.disable
+      begin
+        yield
+      ensure
+        GC.enable
+      end
+    end
+  end
+
+  def print_brains(brains)
+    say_status 'Bots', brains.values.flatten.join(', ')
+  end
+
+  def get_bots(arena, *brains)
+    brains.flatten.map do |brain|
+      RTanque::Bot.new_random_location(arena, brain)
+    end
+  end
+
+  def get_brains(*bots)
+    bots.inject({}) do |brains, bot_path|
+      if brains.has_key?(bot_path)
+        # allow for same bot to be loaded more than once
+        brains[bot_path] << brains[bot_path].first
+      else
+        brains[bot_path] = get_diff_in_object_space(RTanque::Bot::Brain) do
+          begin
+            require(bot_path)
+          rescue LoadError => e
+            say_status 'Error', e.message, :red
+            exit 1
+          end
+        end
+      end
+      brains
+    end
+  end
+
+  def get_descendants(klass)
+    ::ObjectSpace.each_object(::Class).select {|k| k < klass }
+  end
+
+  def get_diff_in_object_space(klass)
+    current_object_space = get_descendants(klass)
+    yield
+    get_descendants(klass) - current_object_space
+  end
+end
+
+RTanqueCLI.start
