@@ -24,10 +24,10 @@ module RTanque
     end
 
     def hits(bots, &on_hit)
-      bots.each do |bot|
-        if bot.position.within_radius?(self.position, Bot::RADIUS)
+      bots.each do |hit_bot|
+        if hit_bot.position.within_radius?(self.position, Bot::RADIUS)
           self.dead!
-          on_hit.call(bot) if on_hit
+          on_hit.call(self.bot, hit_bot) if on_hit
           break
         end
       end

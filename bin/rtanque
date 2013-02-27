@@ -15,7 +15,7 @@ class RTanqueCLI < Thor
   method_option :width, :aliases => '-w', :default => 1200, :type => :numeric, :banner => 'width of window'
   method_option :height, :aliases => '-h', :default => 800, :type => :numeric, :banner => 'height of window'
   method_option :gui, :default => true, :type => :boolean
-  method_option :gc, :aliasies => '-garbagecollection', :default => true, :type => :boolean
+  method_option :gc, :aliasies => '-garbagecollection', :default => true, :type => :boolean, :banner => 'disable GC (EXPERIMENTAL)'
   def start(*bots)
     if bots.empty?
       say "Provide paths to brains", :red
@@ -42,6 +42,10 @@ class RTanqueCLI < Thor
     else
       match.start
       trap(:INT) { match.stop }
+    end
+    say "\n#{'=' * 10} #{match.ticks} ticks #{'=' * 10}", :green
+    match.bots.each do |bot|
+      say " * #{bot.name} [#{bot.health} health]", :yellow
     end
   end
 
