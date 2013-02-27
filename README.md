@@ -70,6 +70,20 @@ class Bot < RTanque::Bot::Brain
 end
 ```
 
+**RTanque::Heading**
+This class handles angles. It is a wrapper around Float bound to `(0..Math::PI*2)`
+
+```ruby
+RTanque::Heading.new(Math::PI)
+=> <RTanque::Heading: 3.141592653589793rad 180.0deg>
+
+RTanque::Heading.new_from_degrees(180)
+=> <RTanque::Heading: 3.141592653589793rad 180.0deg>
+
+RTanque::Heading.new_from_degrees(180) + RTanque::Heading.new(Math::PI)
+=> <RTanque::Heading: 0.0rad 0.0deg>
+```
+
 ## Contributing
 
 1. Fork it
