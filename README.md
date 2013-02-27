@@ -82,6 +82,12 @@ RTanque::Heading.new_from_degrees(180)
 
 RTanque::Heading.new_from_degrees(180) + RTanque::Heading.new(Math::PI)
 => <RTanque::Heading: 0.0rad 0.0deg>
+
+RTanque::Heading.new(Math::PI) + (Math::PI / 2.0)
+=> <RTanque::Heading: 4.71238898038469rad 270.0deg>
+
+RTanque::Heading.new == 0
+=> true
 ```
 
 ## Contributing
