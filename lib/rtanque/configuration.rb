@@ -6,6 +6,7 @@ module RTanque
 
   Configuration = ::Configuration.for('default') do
     raise_brain_tick_errors true
+
     bot do
       radius 19
       health_reduction_on_exception 2
@@ -14,6 +15,8 @@ module RTanque
       speed_step 0.05
       turn_step one_degree * 1.5
       fire_power 1..5
+      gun_energy_max 10
+      gun_energy_factor 10
     end
     turret do
       length 28
@@ -25,7 +28,7 @@ module RTanque
     end
     shell do
       speed_factor 4
-      impact_health_reduction 1.25 # multiplied by shell.fire_power
+      ratio 1.5 # used by Bot#adjust_fire_power and to calculate damage done by shell to bot
     end
     explosion do
       life_span 70 * 1 # should be multiple of the number of frames

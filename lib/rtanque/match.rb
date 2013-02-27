@@ -49,7 +49,7 @@ module RTanque
 
     def pre_shell_tick(shell)
       shell.hits(self.bots.all_but(shell.bot)) do |bot_hit|
-        damage = RTanque::Shell::IMPACT_HEALTH_REDUCTION * shell.fire_power
+        damage = (shell.fire_power ** RTanque::Shell::RATIO)
         bot_hit.reduce_health(damage)
         if bot_hit.dead?
           @explosions.add(Explosion.new(bot_hit.position))

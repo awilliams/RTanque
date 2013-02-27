@@ -1,6 +1,6 @@
 module RTanque
   class Bot
-    Sensors = Struct.new(:ticks, :health, :speed, :position, :heading, :radar, :radar_heading, :turret_heading) do
+    Sensors = Struct.new(:ticks, :health, :speed, :position, :heading, :radar, :radar_heading, :turret_heading, :gun_energy) do
       def initialize(*args, &block)
         super(*args)
         block.call(self) if block

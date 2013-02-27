@@ -1,7 +1,7 @@
 module RTanque
   class Shell
     include Movable
-    IMPACT_HEALTH_REDUCTION = Configuration.shell.impact_health_reduction
+    RATIO = Configuration.shell.ratio
     SHELL_SPEED_FACTOR = Configuration.shell.speed_factor
     attr_reader :bot, :arena, :fire_power
 

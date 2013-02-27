@@ -4,7 +4,9 @@ module RTanque
     extend NormalizedAttr
     HEALTH_REDUCTION_ON_EXCEPTION = Configuration.bot.health_reduction_on_exception
     RADIUS = Configuration.bot.radius
-    attr_reader :arena, :brain, :radar, :turret, :ticks, :health, :fire_power
+    GUN_ENERGY_MAX = Configuration.bot.gun_energy_max
+    GUN_ENERGY_FACTOR = Configuration.bot.gun_energy_factor
+    attr_reader :arena, :brain, :radar, :turret, :ticks, :health, :fire_power, :gun_energy
     attr_accessor :gui_window
     attr_normalized(:speed, Configuration.bot.speed, Configuration.bot.speed_step)
     attr_normalized(:heading, Heading::FULL_RANGE, Configuration.bot.turn_step)
@@ -47,14 +49,14 @@ module RTanque
     end
 
     def adjust_fire_power
-      @gun_energy ||= 0
-      @gun_energy += 1
+      @gun_energy ||= GUN_ENERGY_MAX
       if @gun_energy <= 0
         self.fire_power = 0
       else
-        @gun_energy -= ((self.fire_power**2) + 5)
+        @gun_energy -= (self.fire_power**RTanque::Shell::RATIO) * GUN_ENERGY_FACTOR
       end
-      @gun_energy = 10 if @gun_energy > 10
+      @gun_energy += 1
+      @gun_energy = GUN_ENERGY_MAX if @gun_energy > GUN_ENERGY_MAX
     end
 
     def firing?
@@ -106,6 +108,7 @@ module RTanque
         sensors.heading = self.heading
         sensors.radar = self.radar.to_enum
         sensors.radar_heading = self.radar.heading
+        sensors.gun_energy = self.gun_energy
         sensors.turret_heading = self.turret.heading
         sensors.gui_window = self.gui_window
       end
