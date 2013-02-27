@@ -12,7 +12,7 @@ describe RTanque::Shell do
 
     it 'should yield hit bot' do
       bots = [mockbot(10, 10, 'deadbot')]
-      expect { |p| shell.hits(bots, &p) }.to yield_with_args(bots[0])
+      expect { |p| shell.hits(bots, &p) }.to yield_with_args(bot, bots[0])
     end
 
     it 'shell should be dead after hit' do
@@ -24,12 +24,12 @@ describe RTanque::Shell do
 
     it 'should hit shell on bot radius' do
       bots = [mockbot(10 + RTanque::Bot::RADIUS, 10, 'deadbot')]
-      expect { |p| shell.hits(bots, &p) }.to yield_with_args(bots[0])
+      expect { |p| shell.hits(bots, &p) }.to yield_with_args(bot, bots[0])
     end
 
     it 'should not hit shell outside bot radius' do
       bots = [mockbot(10 + RTanque::Bot::RADIUS + 0.01, 10, 'deadbot')]
-      expect { |p| shell.hits(bots, &p) }.not_to yield_with_args(bots[0])
+      expect { |p| shell.hits(bots, &p) }.not_to yield_with_args(bot, bots[0])
     end
   end
 end
