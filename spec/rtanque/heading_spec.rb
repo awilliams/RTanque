@@ -128,7 +128,7 @@ describe RTanque::Heading do
     it 'returns a new object which does not affect old' do
       original = described_class.new(0.0)
       copy = original.clone
-      expect(copy.radians).not_to equal original.radians
+      expect(copy).not_to equal original
     end
   end
 
