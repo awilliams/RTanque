@@ -16,7 +16,7 @@ module RTanque
     end
 
     def max_ticks_reached?
-      self.max_ticks && self.ticks > self.max_ticks
+      self.max_ticks && self.ticks >= self.max_ticks
     end
 
     def finished?

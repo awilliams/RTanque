@@ -19,6 +19,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'gosu'
   gem.add_dependency 'configuration'
+  gem.add_dependency 'octokit'
   gem.add_dependency 'thor'
 
   gem.add_development_dependency 'pry'
