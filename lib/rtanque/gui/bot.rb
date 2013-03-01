@@ -4,12 +4,10 @@ module RTanque
   module Gui
     class Bot
       attr_reader :bot
-      COLORS = %w(blue lime red white yellow)
 
       def initialize(window, bot)
         @window = window
         @bot = bot
-        #color = COLORS.respond_to?(:sample) ? COLORS.sample : COLORS[Kernel.rand(COLORS.length)]
         @body_image = Gosu::Image.new(@window, Gui.resource_path("images/body.png"))
         @turret_image = Gosu::Image.new(@window, Gui.resource_path("images/turret.png"))
         @radar_image = Gosu::Image.new(@window, Gui.resource_path("images/radar.png"))
@@ -20,9 +18,7 @@ module RTanque
 
       def draw
         position = [@bot.position.x, @window.height - @bot.position.y]
-        draw_body(position)
-        draw_turret(position)
-        draw_radar(position)
+        draw_bot(position)
         draw_name(position)
       end
 
@@ -31,16 +27,10 @@ module RTanque
         @y_factor += step unless @y_factor > factor
       end
 
-      def draw_body(position)
-        @body_image.draw_rot(position[0], position[1], ZOrder::BOT_BODY, @bot.heading.to_degrees, 0.5, 0.5, @x_factor, @y_factor)
-      end
-
-      def draw_turret(position)
-        @turret_image.draw_rot(position[0], position[1], ZOrder::BOT_TURRET, @bot.turret.heading.to_degrees, 0.5, 0.5, @x_factor, @y_factor)
-      end
-
-      def draw_radar(position)
-        @radar_image.draw_rot(position[0], position[1], ZOrder::BOT_RADAR, @bot.radar.heading.to_degrees, 0.5, 0.5, @x_factor, @y_factor)
+      def draw_bot(position)
+        @body_image.draw_rot(position[0], position[1], ZOrder::BOT_BODY, Gosu.radians_to_degrees(@bot.heading.to_f), 0.5, 0.5, @x_factor, @y_factor)
+        @turret_image.draw_rot(position[0], position[1], ZOrder::BOT_TURRET, Gosu.radians_to_degrees(@bot.turret.heading.to_f), 0.5, 0.5, @x_factor, @y_factor)
+        @radar_image.draw_rot(position[0], position[1], ZOrder::BOT_RADAR, Gosu.radians_to_degrees(@bot.radar.heading.to_f), 0.5, 0.5, @x_factor, @y_factor)
       end
 
       def draw_name(position)
