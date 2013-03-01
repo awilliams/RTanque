@@ -23,28 +23,37 @@
 
 <div class="container">
   <section id="main_content">
-    <h1><a href="https://docs.google.com/forms/d/11wYOq1lO3DQLsi_aB98aZj3Oa1EDVsVHNE7jUFUE9xQ/viewform#start=embed">Signup
-      for the Madrid.rb Battle</a></h1>
+    <h1>Signup for the Madrid.rb Battle</h1>
 
     <p>Create a <em>private/secret</em> gist with your bot code</p>
+
+    <iframe src="https://docs.google.com/forms/d/11wYOq1lO3DQLsi_aB98aZj3Oa1EDVsVHNE7jUFUE9xQ/viewform?embedded=true#start=embed" width="600" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+
+    <a href="https://docs.google.com/forms/d/11wYOq1lO3DQLsi_aB98aZj3Oa1EDVsVHNE7jUFUE9xQ/viewform#start=embed" target="_blank">Open the registration form in new window</a>
+
+    <h2>Gameplay</h2>
+    <p>RTanque players must program the brain of a tank and then send it into battle with others bots. Last bot standing wins.</p>
 
     <img src="https://raw.github.com/awilliams/RTanque/master/screenshots/battle_1.png">
 
     <h2>Requirements</h2>
 
     <ul>
-      <li>The <a href="https://github.com/jlnr/gosu">Gosu</a> library used for rendering has some dependencies. Use the
-        <a href="https://github.com/jlnr/gosu/wiki/Getting-Started-on-Linux">Gosu getting started</a> to resolve any for
-        your system.
+      <li>Ruby 1.9.3 is minimum recommended version of Ruby, 2.0 the preferred (tested on 1.8.7, 1.9.2 and 1.9.3)</li>
+      <li>
+        The <a href="https://github.com/jlnr/gosu">Gosu</a> library used for rendering has some system dependencies. Help resolving dependencies on:
+        <ul>
+          <li><a href="https://github.com/jlnr/gosu/wiki/Getting-Started-on-Linux">Linux</a></li>
+          <li><a href="https://github.com/jlnr/gosu/wiki/Getting-Started-on-OS-X">OS X</a></li>
+          <li><a href="https://github.com/jlnr/gosu/wiki/Getting-Started-on-Windows">Windows</a></li>
+        </ul>
       </li>
-      <li>Ruby 1.9.3 (tested on 1.8.7 and 1.9.2)</li>
     </ul>
 
     <h2>Quick Start</h2>
 
     <p>Make a project directory, init bundler, add the RTanque gem, and create a bot</p>
 
-<strong>Ruby 1.9.3 is minimum recommended version of Ruby, 2.0 the preferred.</strong>
 <pre><code>$ mkdir -p rtanque; cd rtanque
 $ bundle init
 $ echo "gem 'rtanque', :github =&gt; 'awilliams/RTanque'" &gt;&gt; Gemfile
@@ -94,6 +103,7 @@ end
     <ul>
       <li><a href="https://github.com/awilliams/RTanque">Github page</a></li>
       <li><a href="http://robocode.sourceforge.net/">Robocode (original Java game)</a></li>
+      <li><a href="http://robowiki.net/wiki/Melee_Strategy">Melee Strategy Guide from Robocode wiki</a></li>
     </ul>
 
   </section>
