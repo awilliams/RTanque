@@ -13,7 +13,8 @@ module RTanque
     end
 
     def add_brain_path(brain_path)
-      bots = self.new_bots_from_brain_path(brain_path.gsub('\.rb$', ''))
+      parsed_path = self.parse_brain_path(brain_path)
+      bots = parsed_path.multiplier.times.map { self.new_bots_from_brain_path(parsed_path.path) }.flatten
       self.match.add_bots(bots)
     end
 
@@ -60,6 +61,18 @@ module RTanque
 
     def get_descendants_of_class(klass)
       ::ObjectSpace.each_object(::Class).select {|k| k < klass }
+    end
+
+    BRAIN_PATH_PARSER = /\A(.+?)\:[x|X](\d+)\z/
+    ParsedBrainPath = Struct.new(:path, :multiplier)
+    def parse_brain_path(brain_path)
+      path = brain_path.gsub('\.rb$', '')
+      multiplier = 1
+      brain_path.match(BRAIN_PATH_PARSER) { |m|
+        path = m[1]
+        multiplier = m[2].to_i
+      }
+      ParsedBrainPath.new(path, multiplier)
     end
   end
 end
