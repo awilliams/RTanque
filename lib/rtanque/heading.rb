@@ -1,6 +1,7 @@
 module RTanque
   class Heading < Numeric
     FULL_ANGLE   =      Math::PI * 2.0
+    HALF_ANGLE   =      Math::PI
     EIGHTH_ANGLE =      Math::PI / 4.0
     ONE_DEGREE   =      FULL_ANGLE / 360.0
     FULL_RANGE   =      (0..FULL_ANGLE)
