@@ -15,8 +15,12 @@ module RTanque
       @dead = false
     end
 
+    def bound_to_arena
+      false
+    end
+
     def dead?
-      @dead ||= self.position.on_wall?
+      @dead ||= self.position.outside_arena?
     end
 
     def dead!

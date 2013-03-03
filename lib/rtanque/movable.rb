@@ -24,8 +24,12 @@ module RTanque
       @position = val
     end
 
+    def bound_to_arena
+      true
+    end
+
     def update_position
-      @position = @position.move(self.heading, self.speed)
+      @position = @position.move(self.heading, self.speed, self.bound_to_arena)
     end
 
     def heading

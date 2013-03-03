@@ -2,6 +2,7 @@ module RTanque
   Point = Struct.new(:x, :y, :arena) do
     def initialize(*args, &block)
       super
+      block.call(self) if block
       self.freeze
     end
 
@@ -41,21 +42,28 @@ module RTanque
       self.on_top_wall? || self.on_bottom_wall? || self.on_right_wall? || self.on_left_wall?
     end
 
-    def move(heading, speed)
+    def outside_arena?
+      self.y > self.arena.height || self.y < 0 || self.x > self.arena.width || self.x < 0
+    end
+
+    def move(heading, speed, bound_to_arena = true)
       # round to avoid floating point errors
       x = RTanque.round((self.x + (Math.sin(heading) * speed)), 10)
       y = RTanque.round((self.y + (Math.cos(heading) * speed)), 10)
-      if x < 0
-        x = 0.0
-      elsif x > self.arena.width
-        x = self.arena.width.to_f
+      self.class.new(x, y, self.arena) { |point| point.bind_to_arena if bound_to_arena }
+    end
+
+    def bind_to_arena
+      if self.x < 0
+        self.x = 0.0
+      elsif self.x > self.arena.width
+        self.x = self.arena.width.to_f
       end
-      if y < 0
-        y = 0.0
-      elsif y > self.arena.height
-        y = self.arena.height.to_f
+      if self.y < 0
+        self.y = 0.0
+      elsif self.y > self.arena.height
+        self.y = self.arena.height.to_f
       end
-      self.class.new(x, y, self.arena)
     end
 
     def heading(other_point)

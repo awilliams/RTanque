@@ -13,7 +13,7 @@ module RTanque
 
       def draw
         position = [self.shell.position.x, @window.height - self.shell.position.y]
-        @shell_image.draw(position[0], position[1], ZOrder::SHELL)
+        @shell_image.draw_rot(position[0], position[1], ZOrder::SHELL, 0, 0.5, 0.5)
       end
     end
   end

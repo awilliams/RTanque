@@ -1,6 +1,6 @@
 module RTanque
   module NormalizedAttr
-    MAX_DELTA = 1.0 / 0.0
+    MAX_DELTA = 1.0 / 0.0 # INFINITY
     def attr_normalized(attr_name, range, max_delta = MAX_DELTA)
       @_normalized_attrs ||= {}
       @_normalized_attrs[attr_name] = AttrContainer.new(range, max_delta)
