@@ -1,7 +1,6 @@
 module RTanque
   class Bot
     class Brain
-      NAME = 'Brain'
       attr_accessor :sensors, :command
       attr_reader :arena
 

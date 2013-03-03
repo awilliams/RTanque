@@ -58,10 +58,10 @@ module RTanque
     end
 
     def tick
-      @ticks += 1
       self.shells.tick
       self.bots.tick
       self.explosions.tick
+      @ticks += 1
     end
   end
 end
