@@ -1,8 +1,7 @@
 require 'configuration'
 
 module RTanque
-  full_angle = Math::PI * 2
-  one_degree = (Math::PI / 180)
+  one_degree = (Math::PI / 180.0)
 
   Configuration = ::Configuration.for('default') do
     raise_brain_tick_errors true
@@ -27,11 +26,11 @@ module RTanque
       vision -(one_degree * 10.0)..(one_degree * 10.0)
     end
     shell do
-      speed_factor 4
+      speed_factor 4.5
       ratio 1.5 # used by Bot#adjust_fire_power and to calculate damage done by shell to bot
     end
     explosion do
-      life_span 70 * 1 # should be multiple of the number of frames
+      life_span 70 * 1 # should be multiple of the number of frames in the explosion animation
     end
     gui do
       update_interval 16.666666 # in milliseconds. 16.666666 == 60 FPS
