@@ -18,7 +18,7 @@ RTanque is based on the Java project [Robocode](http://robocode.sourceforge.net/
  * The [Gosu](https://github.com/jlnr/gosu) library used for rendering has some dependencies. Use the [Gosu getting started](https://github.com/jlnr/gosu/wiki/Getting-Started-on-Linux) to resolve any for your system.
  * Ruby 1.9.3 (tested on 1.8.7 and 1.9.2)
 
-## Usage
+## Quick Start
 
 Make a project directory, init bundler, add the RTanque gem, and create a bot:
 
