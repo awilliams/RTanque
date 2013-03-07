@@ -1,9 +1,17 @@
 # RTanque [![Build Status](https://travis-ci.org/awilliams/RTanque.png?branch=dev)](https://travis-ci.org/awilliams/RTanque) [![CodeClimate](https://codeclimate.com/github/awilliams/RTanque.png)](https://codeclimate.com/github/awilliams/RTanque)
 
-RTanque is a game for programmers. The goal is to make a tank which will fight others in a melee battle (all versus all).
+**What is this?**
+RTanque is a game for ( *Ruby* ) programmers. Players program the brain of a tank and then send their tank+brain into battle with other bots. All tanks are otherwise equal.
 
-A basic tank is easy to program and could be used as a basis for learning Ruby.
+Rules of the game are simple: `Last bot standing wins`. Gameplay is also pretty simple. Each tank has a base, turret and radar, each of which rotates independently. The base moves the tank, the turret has a gun mounted to it which can fire at other tanks, and the radar detects other tanks in its field of vision.
 
+Have fun competing against friends' tanks or the sample ones included. Maybe you'll start a small league at your local Ruby meetup.
+
+Sound difficult or time consuming? It's not! Check out the included sample tank [Seek&Destroy](https://github.com/awilliams/RTanque/blob/master/sample_bots/seek_and_destroy.rb) (which is actually fairly difficult to beat with the keyboard controlled bot). Note that it clocks in at under 50 LOC.
+
+This is not an original idea, see [influences](https://github.com/awilliams/RTanque#influences). There's a lot of resources around tank design and tactics.
+
+Here's a screenshot of a battle:
 ![Battle](https://raw.github.com/awilliams/RTanque/master/screenshots/battle_1.png)
 
 #### Influences
