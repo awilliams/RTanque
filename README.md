@@ -15,11 +15,15 @@ How does it look? Here's a [video](https://www.youtube.com/watch?v=G7i5X8pI6dk&h
 ![Battle](https://raw.github.com/awilliams/RTanque/master/screenshots/battle_1.png)
 
 #### Influences
-RTanque is based on the Java project [Robocode](http://robocode.sourceforge.net/) and inspired by other Ruby ports. Thanks and credit go to them.
+RTanque is based on the Java project [Robocode](http://robocode.sourceforge.net/) and inspired by other Ruby ports. Thanks and credit go to them both.
 
-* http://robocode.sourceforge.net/ (Original java game, image resources used from here)
-* http://rrobots.rubyforge.org/ (Ruby port)
-* https://github.com/ralreegorganon/rrobots (Ruby port)
+* [RobotWar](http://corewar.co.uk/robotwar/) - Perhaps the canonical version. Created in 1970's and set in the distant 2002. Apple II
+* [Robocode](http://robocode.sourceforge.net/) - Java game, originally from IBM. Tank & explosion images taken from here.
+* [RRobots](http://rrobots.rubyforge.org/) - Ruby port of Robocode. 2005
+* [RRobots fork](https://github.com/ralreegorganon/rrobots)
+* [FightCode](http://fightcodegame.com/) - Online javascript tank game
+* [Scalatron](http://scalatron.github.com/) - Scala bot game
+* [More...](https://www.google.com/?q=robocode%20clone)
 
 ## Requirements
 
