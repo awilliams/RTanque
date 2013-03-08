@@ -11,7 +11,7 @@ Sound difficult or time consuming? It's not! Check out the included sample tank 
 
 This is not an original idea, see [influences](https://github.com/awilliams/RTanque#influences). There's a lot of resources out there around tank design and tactics that could be applied to RTanque.
 
-Here's a screenshot of a battle:
+How does it look? Here's a [video](https://www.youtube.com/watch?v=G7i5X8pI6dk&hd=1) and screenshot of the game:
 ![Battle](https://raw.github.com/awilliams/RTanque/master/screenshots/battle_1.png)
 
 #### Influences
