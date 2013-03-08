@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'configuration'
   gem.add_dependency 'octokit'
   gem.add_dependency 'thor'
+  gem.add_dependency 'texplay'
 
   gem.add_development_dependency 'pry'
   gem.add_development_dependency 'rspec'
