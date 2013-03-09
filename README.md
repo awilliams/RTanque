@@ -34,9 +34,9 @@ RTanque is based on the Java project [Robocode](http://robocode.sourceforge.net/
 
 Make a project directory, init bundler, add the RTanque gem, and create a bot:
 
-    $ mkdir -p rtanque/bots; cd rtanque
+    $ mkdir RTanque; cd RTanque
     $ bundle init
-    $ echo "gem 'rtanque', :github => 'awilliams/RTanque'" >> Gemfile
+    $ echo "gem 'rtanque'" >> Gemfile
     $ bundle
     $ bundle exec rtanque init my_bot
     $ bundle exec rtanque start bots/my_bot sample_bots/keyboard sample_bots/camper:x2
