@@ -38,8 +38,8 @@ Make a project directory, init bundler, add the RTanque gem, and create a bot:
     $ bundle init
     $ echo "gem 'rtanque'" >> Gemfile
     $ bundle
-    $ bundle exec rtanque init my_bot
-    $ bundle exec rtanque start bots/my_bot sample_bots/keyboard sample_bots/camper:x2
+    $ bundle exec rtanque new_bot my_deadly_bot
+    $ bundle exec rtanque start bots/my_deadly_bot sample_bots/keyboard sample_bots/camper:x2
 
 *Drive the Keyboard bot with asdf. Aim/fire with the arrow keys*
 

@@ -10,21 +10,22 @@ class RTanqueCLI < Thor
   BOT_DIR = 'bots'
   source_root(File.expand_path('../../', __FILE__))
 
-  desc "start <path_to_brain> <path_to_brain>:x3 ...", "Start match"
+  desc "start <path_to_brain> <path_to_brain>:x3 ...", "Starts match with given bots"
   long_desc <<-LONGDESC
 Start an RTanque match. Provide as arguments paths to the brains.
+Note that multiple of the same bot can be loaded by appending ':x<int>' to the path. Eg 'bot/my_bot:x2'
 
 There exist a few sample bots to help get started:
-\x5 * sample_bots/keyboard (special bot controlled via keyboard: a/s/d/f and arrow keys)
+\x5 * sample_bots/keyboard (special bot controlled with keyboard: a/s/d/f and arrow keys)
 \x5 * sample_bots/seek_and_destroy
 \x5 * sample_bots/camper
 LONGDESC
   method_option :width, :aliases => '-w', :default => 1200, :type => :numeric, :banner => 'width of window'
-  method_option :height, :aliases => '-h', :default => 800, :type => :numeric, :banner => 'height of window'
-  method_option :max_ticks, :aliases => '-m', :default => Float::INFINITY, :type => :numeric, :banner => 'max ticks'
-  method_option :gui, :default => true, :type => :boolean
+  method_option :height, :aliases => '-h', :default => 700, :type => :numeric, :banner => 'height of window'
+  method_option :max_ticks, :aliases => '-m', :default => Float::INFINITY, :type => :numeric, :banner => 'max ticks allowed per match'
+  method_option :gui, :default => true, :type => :boolean, :banner => 'false to run headless'
   method_option :gc, :default => true, :type => :boolean, :banner => 'disable GC (EXPERIMENTAL)'
-  method_option :quiet, :default => false, :type => :boolean, :banner => 'disable chatter'
+  method_option :quiet, :aliases => '-q', :default => false, :type => :boolean, :banner => 'disable chatter'
   def start(*brain_paths)
     runner = RTanque::Runner.new(options[:width], options[:height], options[:max_ticks])
     brain_paths.each { |brain_path|
@@ -40,16 +41,23 @@ LONGDESC
     self.print_runner_stats(runner) unless options[:quiet]
   end
 
-  desc "init bot_name", "Creates a bot brain template"
-  def init(bot_name)
+  desc "new_bot <bot_name>", "Creates a new bot"
+  long_desc <<-LONGDESC
+Helper to create a basic brain template in the bots directory
+LONGDESC
+  def new_bot(bot_name)
     @bot_name = bot_name
     @bot_class_name = Thor::Util.camel_case(bot_name)
     template('templates/bot.erb', "#{BOT_DIR}/#{Thor::Util.snake_case(bot_name)}.rb")
   end
 
-  desc "gist <gist_id> <gist_id> ...", "Downloads files from gives gists into #{BOT_DIR} directory"
-  def fetch_gist(*gist_ids)
-    gist_ids.each { |gist_id| self.download_gist(gist_id) }
+  desc "get_gist <gist_id> <gist_id> ...", "Downloads files from given gist ids into #{BOT_DIR} directory"
+  long_desc <<-LONGDESC
+Helper to download tanks from github gists for easier sharing. Gists can be both 'secret' and 'public'.
+LONGDESC
+  method_option :force, :aliases => '-f', :default => false, :type => :boolean, :banner => 'overwrite existing file without prompt'
+  def get_gist(*gist_ids)
+    gist_ids.each { |gist_id| self.download_gist(gist_id, options) }
   end
 
   protected
@@ -84,11 +92,11 @@ LONGDESC
     end
   end
 
-  def download_gist(gist_id)
+  def download_gist(gist_id, options)
     gist = Octokit.gist(gist_id)
     gist.files.values.map do |gist_file|
       gist_path = "#{BOT_DIR}/#{gist.user.login}.#{gist_id}/#{gist_file.filename}"
-      create_file(gist_path, gist_file.content)
+      create_file(gist_path, gist_file.content, options)
     end
   end
 
