@@ -226,6 +226,36 @@ describe RTanque::Heading do
     end
   end
 
+  describe '#*' do
+    it 'returns new instance' do
+      a = described_class.new(NINETY)
+      result = a * NINETY
+      expect(result).not_to eql a
+      expect(result).not_to equal a
+      expect(result).to be_kind_of described_class
+    end
+
+    it 'correctly multiplies' do
+      a = described_class.new(NINETY)
+      expect(a * 2.0).to eq NINETY * 2.0
+    end
+  end
+
+  describe '#/' do
+    it 'returns new instance' do
+      a = described_class.new(NINETY)
+      result = a / NINETY
+      expect(result).not_to eql a
+      expect(result).not_to equal a
+      expect(result).to be_kind_of described_class
+    end
+
+    it 'correctly divides' do
+      a = described_class.new(NINETY * 2.0)
+      expect(a / 2.0).to eq NINETY
+    end
+  end
+
   describe '#-@' do
     it 'creates a new instance' do
       a = described_class.new(1.0)

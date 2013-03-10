@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 module RTanque
   class Heading < Numeric
     FULL_ANGLE   =      Math::PI * 2.0
@@ -25,7 +26,7 @@ module RTanque
 
     def self.delta_between_points(from_point, from_point_heading, to_point)
       rel_heading = self.new_between_points(from_point, to_point)
-      RTanque::Heading.new(from_point_heading).delta(rel_heading)
+      self.new(from_point_heading).delta(rel_heading)
     end
 
     def self.rand
@@ -71,6 +72,14 @@ module RTanque
       self.+(-r)
     end
 
+    def *(r)
+      self.class.new(self.radians * self.extract_radians_from_value(r))
+    end
+
+    def /(r)
+      self.*(1.0 / r)
+    end
+
     # unary operator
     def +@
       self.class.new(+self.radians)
@@ -86,7 +95,7 @@ module RTanque
     end
 
     def inspect
-      "<#{self.class.name}: #{self.to_f}rad #{self.to_degrees}deg>"
+      "<#{self.class.name}: #{self.to_f}rad #{self.to_degrees}°>"
     end
 
     def to_f
