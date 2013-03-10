@@ -10,7 +10,7 @@
 #   d   rotate right
 #
 #   ↑   fire powerful shot
-#   ↓   fire week shoot
+#   ↓   fire week shot
 #   ←   rotate turret left
 #   →   rotate turret right
 class Keyboard < RTanque::Bot::Brain
