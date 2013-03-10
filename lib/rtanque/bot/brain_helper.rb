@@ -1,7 +1,7 @@
 module RTanque
   class Bot
+    # Some helpful constants and methods for use as mixin in {RTanque::Bot::Brain}
     module BrainHelper
-      # Some helpful constants
       BOT_RADIUS          = Bot::RADIUS
       MAX_FIRE_POWER      = Bot::MAX_FIRE_POWER
       MIN_FIRE_POWER      = Bot::MIN_FIRE_POWER
@@ -12,6 +12,9 @@ module RTanque
       MAX_RADAR_ROTATION  = Configuration.radar.turn_step
 
       # Run block every 'num_of_ticks'
+      # @param [Integer] num_of_ticks tick interval at which to execute block
+      # @yield
+      # @return [void]
       def at_tick_interval(num_of_ticks)
         yield if sensors.ticks % num_of_ticks == 0
       end

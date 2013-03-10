@@ -1,4 +1,15 @@
+# RTanque
+#
+# #Interesting classes for the spelunker:
+#
+# * {RTanque::Bot::Brain} All brains should inherit from this class
+# * {RTanque::Bot::Sensors} Instance provided to {RTanque::Bot::Brain#sensors}
+# * {RTanque::Bot::Command} Instance provided to {RTanque::Bot::Brain#command}
+# * {RTanque::Heading} Handles angles
+# * {RTanque::Point} Handles coordinates
+# * {RTanqueCLI} CLI
 module RTanque
+  # @!visibility private
   def self.round(numeric, precision = nil)
     if RUBY_VERSION >= '1.9'
       numeric.round(precision)

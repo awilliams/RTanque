@@ -1,3 +1,6 @@
+# Seek&Destroy: Sample Bot
+#
+# Enjoys following and target and firing many shots
 class SeekAndDestroy < RTanque::Bot::Brain
   NAME = 'Seek&Destroy'
   include RTanque::Bot::BrainHelper

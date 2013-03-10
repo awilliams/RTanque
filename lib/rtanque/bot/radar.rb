@@ -7,6 +7,11 @@ module RTanque
       VISION_RANGE = Configuration.radar.vision
       attr_normalized(:heading, Heading::FULL_RANGE, Configuration.radar.turn_step)
 
+      # A Reflection is the information obtained for a bot detected by {RTanque::Bot::Radar}
+      #
+      # @attr_reader [RTanque::Heading] heading
+      # @attr_reader [Float] distance
+      # @attr_reader [String] name
       Reflection = Struct.new(:heading, :distance, :name) do
         def self.new_from_points(from_position, to_position, &tap)
           self.new(from_position.heading(to_position), from_position.distance(to_position)).tap(&tap)

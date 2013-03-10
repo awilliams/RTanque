@@ -4,20 +4,29 @@ $LOAD_PATH << Dir.pwd
 $LOAD_PATH << File.expand_path('../../../', __FILE__)
 
 module RTanque
+  # Runner manages running an {RTanque::Match}
   class Runner
     LoadError = Class.new(::LoadError)
     attr_reader :match
 
+    # @param [Integer] width
+    # @param [Integer] height
+    # @param [*match_args] args provided to {RTanque::Match#initialize}
     def initialize(width, height, *match_args)
       @match = RTanque::Match.new(RTanque::Arena.new(width, height), *match_args)
     end
 
+    # Attempts to load given {RTanque::Bot::Brain} given its path
+    # @param [String] brain_path
+    # @raise [RTanque::Runner::LoadError] if brain could not be loaded
     def add_brain_path(brain_path)
       parsed_path = self.parse_brain_path(brain_path)
       bots = parsed_path.multiplier.times.map { self.new_bots_from_brain_path(parsed_path.path) }.flatten
       self.match.add_bots(bots)
     end
 
+    # Starts the match
+    # @param [Boolean] gui if false, runs headless match
     def start(gui = true)
       if gui
         require 'rtanque/gui'
@@ -64,6 +73,7 @@ module RTanque
     end
 
     BRAIN_PATH_PARSER = /\A(.+?)\:[x|X](\d+)\z/
+    # @!visibility private
     ParsedBrainPath = Struct.new(:path, :multiplier)
     def parse_brain_path(brain_path)
       path = brain_path.gsub('\.rb$', '')

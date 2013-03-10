@@ -1,3 +1,6 @@
+# Camper: Sample Bot
+#
+# Enjoys sitting in the corners and firing powerful shots
 class Camper < RTanque::Bot::Brain
   NAME = 'Camper'
   include RTanque::Bot::BrainHelper

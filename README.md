@@ -5,7 +5,7 @@ RTanque is a game for ( *Ruby* ) programmers. Players program the brain of a tan
 
 Rules of the game are simple: Last bot standing wins. Gameplay is also pretty simple. Each tank has a **base**, **turret** and **radar**, each of which rotate independently. The base moves the tank, the turret has a gun mounted to it which can fire at other tanks, and the radar detects other tanks in its field of vision.
 
-Have fun competing against friends' tanks or the sample ones included. Maybe you'll start a small league at your local Ruby meetup.
+Have fun competing against friends' tanks or the sample ones included. Maybe you'll start a small league at your local Ruby meetup. CLI provides easy way to download bots from gists.
 
 Sound difficult or time consuming? It's not! Check out the included sample tank [Seek&Destroy](https://github.com/awilliams/RTanque/blob/master/sample_bots/seek_and_destroy.rb) (which is actually fairly difficult to beat with the keyboard controlled bot). Note that it clocks in at under 50 LOC.
 
@@ -23,12 +23,12 @@ RTanque is based on the Java project [Robocode](http://robocode.sourceforge.net/
 * [RRobots fork](https://github.com/ralreegorganon/rrobots)
 * [FightCode](http://fightcodegame.com/) - Online javascript tank game
 * [Scalatron](http://scalatron.github.com/) - Scala bot game
-* [More...](https://www.google.com/?q=robocode%20clone)
+* [Many more...](https://www.google.com/?q=robocode%20clone)
 
 ## Requirements
 
  * The [Gosu](https://github.com/jlnr/gosu) library used for rendering has some dependencies. Use the [Gosu getting started](https://github.com/jlnr/gosu/wiki/Getting-Started-on-Linux) to resolve any for your system.
- * Ruby 1.9.3 (tested on 1.8.7 and 1.9.2)
+ * Ruby 2.0.0 or 1.9.3 (tested on 1.8.7 and 1.9.2)
 
 ## Quick Start
 
@@ -43,11 +43,19 @@ Make a project directory, init bundler, add the RTanque gem, and create a bot:
 
 *Drive the Keyboard bot with asdf. Aim/fire with the arrow keys*
 
+## [RTanque Documentation](http://rubydoc.info/github/awilliams/RTanque/master/frames/file/README.md)
+
+  * [RTanque](http://rubydoc.info/github/awilliams/RTanque/master/frames/RTanque)
+  * [RTanque::Bot::Brain](http://rubydoc.info/github/awilliams/RTanque/master/frames/RTanque/Bot/Brain)
+  * [RTanque::Heading](http://rubydoc.info/github/awilliams/RTanque/master/frames/RTanque/Heading)
+  * [RTanque::Point](http://rubydoc.info/github/awilliams/RTanque/master/frames/RTanque/Point)
+
 ## Bot API
 
 The tank api consists of reading input from Brain#sensors and giving output to Brain#command
 
 **Brain#sensors**
+
 ```ruby
 class Bot < RTanque::Bot::Brain
   # RTanque::Bot::Sensors =
@@ -68,6 +76,7 @@ class Bot < RTanque::Bot::Brain
 end
 ```
 **Brain#command**
+
 ```ruby
 class Bot < RTanque::Bot::Brain
   # RTanque::Bot::Command =

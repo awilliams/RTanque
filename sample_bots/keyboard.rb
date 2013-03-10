@@ -1,3 +1,18 @@
+# -*- encoding: utf-8 -*-
+# Keyboard: Sample Bot
+#
+# Special bot controlled with the keyboard
+#
+# Controls:
+#   w   drive forward
+#   s   drive backwards
+#   a   rotate left
+#   d   rotate right
+#
+#   ↑   fire powerful shot
+#   ↓   fire week shoot
+#   ←   rotate turret left
+#   →   rotate turret right
 class Keyboard < RTanque::Bot::Brain
   include RTanque::Bot::BrainHelper
 

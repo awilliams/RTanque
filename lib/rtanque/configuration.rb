@@ -3,6 +3,7 @@ require 'configuration'
 module RTanque
   one_degree = (Math::PI / 180.0)
 
+  # @!visibility private
   Configuration = ::Configuration.for('default') do
     raise_brain_tick_errors true
 
