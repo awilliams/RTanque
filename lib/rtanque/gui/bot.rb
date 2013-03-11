@@ -14,7 +14,7 @@ module RTanque
         @body_image = Gosu::Image.new(@window, Gui.resource_path("images/body.png"))
         @turret_image = Gosu::Image.new(@window, Gui.resource_path("images/turret.png"))
         @radar_image = Gosu::Image.new(@window, Gui.resource_path("images/radar.png"))
-        @score_bar_image = Gosu::Image.new(@window, Gui.resource_path("images/score_bar.png"))
+        @score_bar_image = TexPlay.create_blank_image(@window, 100, 10)
         @name_font = Gosu::Font.new(@window, Window::FONT_NAME, Window::SMALL_FONT_SIZE)
         @x_factor = 1
         @y_factor = 1
