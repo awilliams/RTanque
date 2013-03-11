@@ -51,17 +51,17 @@ module RTanque
           rect 0, 0, 100, 10, :color => [0,0,0,0], :fill => true
           rect 0, 0, x_health ,10, :color => health_color, :fill => true
         }
-        @score_bar_image.draw(x - 50 * @x_factor, y + (30 + RTanque::Bot::RADIUS) * @y_factor, ZOrder::BOT_NAME, @x_factor, @y_factor)
+        @score_bar_image.draw(x - 50 * @x_factor, y + (30 + RTanque::Bot::RADIUS) * @y_factor, ZOrder::BOT_HEALTH, @x_factor, @y_factor)
       end
 
       private
 
       def color_for_health
-        HealthColorCalculator.new(self.bot.sensors.health).color_as_rgb
+        HealthColorCalculator.new(health).color_as_rgb
       end
 
       def health
-        self.bot.sensors.health
+        self.bot.health
       end
     end
   end
