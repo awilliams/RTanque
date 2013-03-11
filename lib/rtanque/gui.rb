@@ -7,12 +7,13 @@ module RTanque
 
     module ZOrder
       BACKGROUND = -1
-      BOT_NAME = 0
-      BOT_BODY = 1
-      BOT_TURRET = 2
-      BOT_RADAR = 3
-      SHELL = 4
-      EXPLOSION = 10
+      BOT_HEALTH = 5
+      BOT_NAME = 6
+      BOT_BODY = 7
+      BOT_TURRET = 8
+      BOT_RADAR = 9
+      SHELL = 10
+      EXPLOSION = 20
     end
   end
 end
