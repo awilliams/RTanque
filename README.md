@@ -50,11 +50,20 @@ Make a project directory, init bundler, add the RTanque gem, and create a bot:
   * [RTanque::Heading](http://rubydoc.info/github/awilliams/RTanque/master/frames/RTanque/Heading)
   * [RTanque::Point](http://rubydoc.info/github/awilliams/RTanque/master/frames/RTanque/Point)
 
+## Sharing
+At some point you'll want to compete against other bots, or maybe you'll even organize a small tournament. Sharing bots is easy.
+
+Ask your friends to upload their bot(s) in a [gist](https://gist.github.com/), which you can then download with the following command:
+
+    bundle exec rtanque get_gist <gist_id> ...
+    
+If you'd like to publicly share your bot, post its gist id on the wiki https://github.com/awilliams/RTanque/wiki/bot-gists
+
 ## Bot API
 
 The tank api consists of reading input from Brain#sensors and giving output to Brain#command
 
-**Brain#sensors**
+**[Brain#sensors](http://rubydoc.info/github/awilliams/RTanque/master/frames/RTanque/Bot/Sensors)**
 
 ```ruby
 class Bot < RTanque::Bot::Brain
@@ -75,7 +84,7 @@ class Bot < RTanque::Bot::Brain
   end
 end
 ```
-**Brain#command**
+**[Brain#command](http://rubydoc.info/github/awilliams/RTanque/master/frames/RTanque/Bot/Command)**
 
 ```ruby
 class Bot < RTanque::Bot::Brain
