@@ -111,8 +111,8 @@ module RTanque
 
     def move(heading, speed, bound_to_arena = true)
       # round to avoid floating point errors
-      x = RTanque.round((self.x + (Math.sin(heading) * speed)), 10)
-      y = RTanque.round((self.y + (Math.cos(heading) * speed)), 10)
+      x = (self.x + (Math.sin(heading) * speed)).round(10)
+      y = (self.y + (Math.cos(heading) * speed)).round(10)
       self.class.new(x, y, self.arena) { |point| point.bind_to_arena if bound_to_arena }
     end
 

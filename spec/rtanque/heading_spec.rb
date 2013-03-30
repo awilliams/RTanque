@@ -52,8 +52,8 @@ describe RTanque::Heading do
 
     it 'correctly handles when a and b are on both sides of 180' do
       @instance = described_class.new(RTanque::Heading::S - RTanque::Heading::ONE_DEGREE)
-      delta = RTanque.round(@instance.delta(RTanque::Heading::S + RTanque::Heading::ONE_DEGREE), 5)
-      expected = RTanque.round(RTanque::Heading::ONE_DEGREE * 2, 5)
+      delta = (@instance.delta(RTanque::Heading::S + RTanque::Heading::ONE_DEGREE)).round(5)
+      expected = (RTanque::Heading::ONE_DEGREE * 2).round(5)
       expect(delta).to eq(expected)
     end
   end
