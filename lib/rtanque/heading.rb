@@ -67,7 +67,7 @@ module RTanque
     # Creates a new RTanque::Heading
     # @param [#to_f] radians degree to wrap (in radians)
     def initialize(radians = NORTH)
-      @radians = self.extract_radians_from_value(radians) % FULL_ANGLE
+      @radians = radians.to_f % FULL_ANGLE
       @memoized = {} # allow memoization since @some_var ||= x doesn't work when frozen
       self.freeze
     end
@@ -108,7 +108,7 @@ module RTanque
     # @param [#to_f] other_heading
     # @return [RTanque::Heading]
     def +(other_heading)
-      self.class.new(self.radians + self.extract_radians_from_value(other_heading))
+      self.class.new(self.radians + other_heading.to_f)
     end
 
     # @param [#to_f] other_heading
@@ -120,7 +120,7 @@ module RTanque
     # @param [#to_f] other_heading
     # @return [RTanque::Heading]
     def *(other_heading)
-      self.class.new(self.radians * self.extract_radians_from_value(other_heading))
+      self.class.new(self.radians * other_heading.to_f)
     end
 
     # @param [#to_f] other_heading
@@ -157,16 +157,6 @@ module RTanque
     # @return [Float]
     def to_degrees
       @memoized[:to_degrees] ||= (self.radians * 180.0) / Math::PI
-    end
-
-    protected
-
-    def extract_radians_from_value(value)
-      if value.respond_to?(:radians)
-        value.radians
-      else
-        value.to_f
-      end
     end
   end
 end
