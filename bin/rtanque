@@ -26,7 +26,9 @@ LONGDESC
   method_option :gui, :default => true, :type => :boolean, :banner => 'false to run headless'
   method_option :gc, :default => true, :type => :boolean, :banner => 'disable GC (EXPERIMENTAL)'
   method_option :quiet, :aliases => '-q', :default => false, :type => :boolean, :banner => 'disable chatter'
+  method_option :seed, :default => Kernel.srand, :type => :numeric, :banner => 'random number seed value'
   def start(*brain_paths)
+    Kernel.srand(options[:seed])
     runner = RTanque::Runner.new(options[:width], options[:height], options[:max_ticks])
     brain_paths.each { |brain_path|
       begin
