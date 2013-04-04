@@ -59,7 +59,7 @@ module RTanque
     end
 
     def self.rand
-      self.new(Float.send(:rand) * FULL_ANGLE)
+      self.new(Kernel.rand * FULL_ANGLE)
     end
 
     attr_reader :radians
