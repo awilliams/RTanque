@@ -21,8 +21,12 @@ module RTanque
       end
 
       def button_down?(button_id)
-        button_id = Gosu::Window.char_to_button_id(button_id) unless button_id.kind_of?(Integer)
-        @gui_window && @gui_window.button_down?(button_id)
+        if self.class.const_defined?(:Gosu)
+          button_id = Gosu::Window.char_to_button_id(button_id) unless button_id.kind_of?(Integer)
+          @gui_window && @gui_window.button_down?(button_id)
+        else
+          false
+        end
       end
 
       def gui_window=(gui_window)
