@@ -1,6 +1,7 @@
 module RTanque
   class Match
     attr_reader :arena, :bots, :shells, :explosions, :ticks, :max_ticks
+    attr_accessor :recorder
 
     def initialize(arena, max_ticks = nil)
       @arena = arena
@@ -58,6 +59,8 @@ module RTanque
     end
 
     def tick
+      recorder.stop if finished? && recorder
+
       self.shells.tick
       self.bots.tick
       self.explosions.tick

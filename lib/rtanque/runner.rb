@@ -8,6 +8,7 @@ module RTanque
   class Runner
     LoadError = Class.new(::LoadError)
     attr_reader :match
+    attr_accessor :recorder, :replayer
 
     # @param [Integer] width
     # @param [Integer] height
@@ -22,6 +23,7 @@ module RTanque
     def add_brain_path(brain_path)
       parsed_path = self.parse_brain_path(brain_path)
       bots = parsed_path.multiplier.times.map { self.new_bots_from_brain_path(parsed_path.path) }.flatten
+      self.recorder.add_bots(bots) if recording?
       self.match.add_bots(bots)
     end
 
@@ -37,6 +39,10 @@ module RTanque
         trap(:INT) { self.match.stop }
         self.match.start
       end
+    end
+
+    def recording?
+      !self.recorder.nil?
     end
 
     protected

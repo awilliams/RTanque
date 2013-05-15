@@ -7,7 +7,7 @@ module RTanque
     MAX_GUN_ENERGY = Configuration.bot.gun_energy_max
     GUN_ENERGY_FACTOR = Configuration.bot.gun_energy_factor
     attr_reader :arena, :brain, :radar, :turret, :ticks, :health, :fire_power, :gun_energy
-    attr_accessor :gui_window
+    attr_accessor :gui_window, :recorder
     attr_normalized(:speed, Configuration.bot.speed, Configuration.bot.speed_step)
     attr_normalized(:heading, Heading::FULL_RANGE, Configuration.bot.turn_step)
     attr_normalized(:fire_power, Configuration.bot.fire_power)
@@ -92,6 +92,8 @@ module RTanque
     end
 
     def execute_command(command)
+      self.record_command(self.ticks, command)
+
       self.fire_power = self.normalize_fire_power(self.fire_power, command.fire_power)
       self.speed = self.normalize_speed(self.speed, command.speed)
       self.heading = self.normalize_heading(self.heading, command.heading)
@@ -113,5 +115,19 @@ module RTanque
         sensors.gui_window = self.gui_window
       end
     end
+
+    def to_command
+      RTanque::Bot::Command.new.tap do |empty_command|
+        empty_command.fire_power = self.fire_power
+        empty_command.speed = self.speed
+        empty_command.heading = self.heading
+        empty_command.radar_heading = self.radar.heading
+        empty_command.turret_heading = self.turret.heading
+      end
+    end
+
+    def record_command(ticks, command)
+      self.recorder.add(self, ticks, command) unless self.recorder.nil?
+    end    
   end
 end
