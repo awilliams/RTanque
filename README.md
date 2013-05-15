@@ -124,8 +124,8 @@ RTanque::Heading.new == 0
 
 Maybe you want to capture an interesting match and send it to friends without sharing your bot brains.  The `--capture` flag records the match in a bot-independent format which can be replayed later using the `replay` command.
 
-  $ bundle exec rtanque start --capture bots/my_deadly_bot sample_bots/keyboard sample_bots/camper:x2
-  $ bundle exec rtanque replay replays/last-match.yml
+    $ bundle exec rtanque start --capture bots/my_deadly_bot sample_bots/keyboard sample_bots/camper:x2
+    $ bundle exec rtanque replay replays/last-match.yml
 
 ## Contributing
 
