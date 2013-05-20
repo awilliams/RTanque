@@ -20,7 +20,8 @@ module RTanque
     end
 
     def finished?
-      @stopped || self.max_ticks_reached? || self.bots.count <= 1
+      @stopped || self.max_ticks_reached? || self.bots.count <= 1 ||
+        self.bots.map(&:name).uniq.size == 1
     end
 
     def add_bots(*bots)

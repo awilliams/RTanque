@@ -21,8 +21,17 @@ describe RTanque::Match do
     end
 
     it 'should be false if two or more bots left' do
-      @instance.add_bots(:bot, :bot2)
+      bot1 = double('bot', :name => "bot1")
+      bot2 = double('bot', :name => "bot2")
+      @instance.add_bots(bot1, bot2)
       expect(@instance.finished?).to be_false
+    end
+
+    it 'should be true if two or more bots left w/ same name' do
+      bot1 = double('bot', :name => "bot1")
+      bot2 = double('bot', :name => "bot1")
+      @instance.add_bots(bot1, bot2)
+      expect(@instance.finished?).to be_true
     end
   end
 
