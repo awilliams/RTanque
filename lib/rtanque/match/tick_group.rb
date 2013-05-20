@@ -14,7 +14,7 @@ module RTanque
       end
 
       def all_but(*to_exclude)
-        self.reject { |member| to_exclude.include?(member) }
+        self.to_a - to_exclude
       end
 
       def delete_if(&block)
