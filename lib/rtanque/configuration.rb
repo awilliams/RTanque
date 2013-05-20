@@ -6,6 +6,7 @@ module RTanque
   # @!visibility private
   Configuration = ::Configuration.for('default') do
     raise_brain_tick_errors true
+    quit_when_finished true
 
     bot do
       radius 19

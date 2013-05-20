@@ -8,6 +8,8 @@ class SeekAndDestroy < RTanque::Bot::Brain
   TURRET_FIRE_RANGE = RTanque::Heading::ONE_DEGREE * 5.0
 
   def tick!
+    @desired_heading ||= nil
+
     if (lock = self.get_radar_lock)
       self.destroy_lock(lock)
       @desired_heading = nil
