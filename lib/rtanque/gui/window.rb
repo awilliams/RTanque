@@ -36,6 +36,7 @@ module RTanque
         self.close if button_down?(Gosu::Button::KbEscape)
         @background.draw(0, 0, ZOrder::BACKGROUND)
         if @match.finished?
+          self.close if Configuration.quit_when_finished
           self.gui_bots.each { |bot| bot.grow(2) }
         end
         self.draw_drawables
