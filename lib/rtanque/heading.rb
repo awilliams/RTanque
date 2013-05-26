@@ -78,7 +78,7 @@ module RTanque
     def delta(to)
       diff = (to.to_f - self.to_f).abs % FULL_ANGLE
       diff = -(FULL_ANGLE - diff) if diff > Math::PI
-      to < self ? -diff : diff
+      to.to_f < self.to_f ? -diff : diff
     end
 
     # @return [RTanque::Heading]
