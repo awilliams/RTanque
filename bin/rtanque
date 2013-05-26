@@ -4,6 +4,7 @@ require 'thor'
 require 'rtanque'
 require 'rtanque/runner'
 require 'octokit'
+require 'yaml'
 
 class RTanqueCLI < Thor
   include Thor::Actions
@@ -27,17 +28,41 @@ LONGDESC
   method_option :gc, :default => true, :type => :boolean, :banner => 'disable GC (EXPERIMENTAL)'
   method_option :quiet, :aliases => '-q', :default => false, :type => :boolean, :banner => 'disable chatter'
   method_option :seed, :default => Kernel.srand, :type => :numeric, :banner => 'random number seed value'
+  method_option :capture, :default => false, :type => :boolean, :banner => 'record the match'
   def start(*brain_paths)
-    Kernel.srand(options[:seed])
-    runner = RTanque::Runner.new(options[:width], options[:height], options[:max_ticks])
-    brain_paths.each { |brain_path|
+    if options[:capture] 
+      runner = RTanque::Recorder.create_runner(options.merge(replay_dir: 'replays'))
+    else
+      Kernel.srand(options[:seed])
+      runner = RTanque::Runner.new(options[:width], options[:height], options[:max_ticks])
+    end
+
+    brain_paths.each do |brain_path|
       begin
         runner.add_brain_path(brain_path)
       rescue RTanque::Runner::LoadError => e
         say e.message, :red
         exit false
       end
-    }
+    end
+
+    self.print_start_banner(runner) unless options[:quiet]
+    self.set_gc(options[:gc]) { runner.start(options[:gui]) }
+    self.print_runner_stats(runner) unless options[:quiet]
+  end
+
+  desc "replay <path_to_replay>", "Replays a previous match"
+  method_option :gui, :default => true, :type => :boolean, :banner => 'false to run headless'
+  method_option :gc, :default => true, :type => :boolean, :banner => 'disable GC (EXPERIMENTAL)'
+  method_option :quiet, :aliases => '-q', :default => false, :type => :boolean, :banner => 'disable chatter'
+  def replay(replay_path)
+    begin
+      runner = RTanque::Replayer.create_runner(replay_path)
+    rescue RTanque::Replayer::LoadError => e
+      say e.message, :red
+      exit false
+    end
+
     self.print_start_banner(runner) unless options[:quiet]
     self.set_gc(options[:gc]) { runner.start(options[:gui]) }
     self.print_runner_stats(runner) unless options[:quiet]
@@ -105,6 +130,7 @@ LONGDESC
   def print_stats(indent = 2, &block)
     self.print_table([].tap(&block), :indent => indent)
   end
+  
 end
 
 RTanqueCLI.start
