@@ -1,10 +1,11 @@
 module RTanque
   class Match
-    attr_reader :arena, :bots, :shells, :explosions, :ticks, :max_ticks
+    attr_reader :arena, :bots, :shells, :explosions, :ticks, :max_ticks, :teams
 
-    def initialize(arena, max_ticks = nil)
+    def initialize(arena, max_ticks = nil, teams = false)
       @arena = arena
       @max_ticks = max_ticks
+      @teams = teams
       @ticks = 0
       @shells = TickGroup.new
       @bots = TickGroup.new
@@ -21,7 +22,7 @@ module RTanque
 
     def finished?
       @stopped || self.max_ticks_reached? || self.bots.count <= 1 ||
-        self.bots.map(&:name).uniq.size == 1
+        (self.teams && self.bots.map(&:name).uniq.size == 1)
     end
 
     def add_bots(*bots)

@@ -23,13 +23,14 @@ LONGDESC
   method_option :width, :aliases => '-w', :default => 1200, :type => :numeric, :banner => 'width of window'
   method_option :height, :aliases => '-h', :default => 700, :type => :numeric, :banner => 'height of window'
   method_option :max_ticks, :aliases => '-m', :default => Float::INFINITY, :type => :numeric, :banner => 'max ticks allowed per match'
+  method_option :teams, :default => false, :type => :boolean, :banner => 'true to do a team based match based on tank names'
   method_option :gui, :default => true, :type => :boolean, :banner => 'false to run headless'
   method_option :gc, :default => true, :type => :boolean, :banner => 'disable GC (EXPERIMENTAL)'
   method_option :quiet, :aliases => '-q', :default => false, :type => :boolean, :banner => 'disable chatter'
   method_option :seed, :default => Kernel.srand, :type => :numeric, :banner => 'random number seed value'
   def start(*brain_paths)
     Kernel.srand(options[:seed])
-    runner = RTanque::Runner.new(options[:width], options[:height], options[:max_ticks])
+    runner = RTanque::Runner.new(options[:width], options[:height], options[:max_ticks], options[:teams])
     brain_paths.each { |brain_path|
       begin
         runner.add_brain_path(brain_path)

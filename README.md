@@ -50,6 +50,36 @@ Make a project directory, init bundler, add the RTanque gem, and create a bot:
   * [RTanque::Heading](http://rubydoc.info/github/awilliams/RTanque/master/frames/RTanque/Heading)
   * [RTanque::Point](http://rubydoc.info/github/awilliams/RTanque/master/frames/RTanque/Point)
 
+## Advanced Options
+
+Set arena dimensions
+
+    $ bundle exec rtanque start --width=400 --height=400 sample_bots/camper:x4
+
+Adjust max ticks allowed
+
+    $ bundle exec rtanque start --max_ticks=500 sample_bots/camper:x4
+
+Run headless match (no gui)
+
+    $ bundle exec rtanque start --gui=false sample_bots/camper:x4
+
+Run team match (teams are currently determined by bot name. Bots with same name are on the same team. The match finished if alive bots have the same name.) https://github.com/awilliams/RTanque/pull/10
+
+    $ bundle exec rtanque start --teams sample_bots/camper:x4 sample_bots/seek_and_destroy.rb:4
+
+Quiet mode (less console chatter).
+
+    $ bundle exec rtanque start --quiet sample_bots/camper:x4
+
+Set random number seed, allowing same battle to be repeated. https://github.com/awilliams/RTanque/pull/7
+
+    $ bundle exec rtanque start --seed 1234 sample_bots/camper:x4
+
+**Experimental** Disable garbage collection during match
+
+    $ bundle exec rtanque start --gc=false sample_bots/camper:x4
+
 ## Sharing
 At some point you'll want to compete against other bots, or maybe you'll even organize a small tournament. Sharing bots is easy.
 
