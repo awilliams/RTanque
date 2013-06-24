@@ -98,7 +98,7 @@ LONGDESC
   def download_gist(gist_id, options)
     gist = Octokit.gist(gist_id)
     gist.files.values.map do |gist_file|
-      gist_path = "#{BOT_DIR}/#{gist.user.login}.#{gist_id}/#{gist_file.filename}"
+      gist_path = "#{BOT_DIR}/#{gist.user && gist.user.login}.#{gist_id}/#{gist_file.filename}"
       create_file(gist_path, gist_file.content, options)
     end
   end
