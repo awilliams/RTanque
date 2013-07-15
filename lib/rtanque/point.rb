@@ -136,5 +136,21 @@ module RTanque
     def distance(other_point)
       self.class.distance(self, other_point)
     end
+    
+    def +(other_point)
+      self.class.new self.x + other_point.x, self.y + other_point.y
+    end
+
+    def -(other_point)
+      self.class.new self.x - other_point.x, self.y - other_point.y
+    end
+
+    def /(denominator)
+      self.class.new self.x / denominator, self.y / denominator
+    end
+
+    def *(v)
+      self.class.new self.x * v, self.y * v
+    end
   end
 end

@@ -8,7 +8,7 @@ describe RTanque do
       @looser = brain_bot { }
       @winner.position = RTanque::Point.new(0, 0, @arena)
       @winner.turret.heading = RTanque::Heading.new(RTanque::Heading::N)
-      @looser.position = RTanque::Point.new(0, @arena.height, @arena)
+      @looser.position = RTanque::Point.new(0, @arena.height - RTanque::Bot::RADIUS, @arena)
       @match = RTanque::Match.new(@arena, 1000)
       @match.add_bots(@winner, @looser)
     }
