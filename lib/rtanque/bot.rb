@@ -49,8 +49,8 @@ module RTanque
     end
 
     def adjust_fire_power
-      @gun_energy ||= MAX_GUN_ENERGY
-      if @gun_energy <= 0
+      @gun_energy ||= 0
+      if @gun_energy < (self.fire_power**RTanque::Shell::RATIO) * GUN_ENERGY_FACTOR
         self.fire_power = 0
       else
         @gun_energy -= (self.fire_power**RTanque::Shell::RATIO) * GUN_ENERGY_FACTOR
