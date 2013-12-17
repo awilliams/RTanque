@@ -28,6 +28,7 @@ describe RTanque::Match do
     end
 
     it 'should be true if two or more bots left w/ same name' do
+      @instance.teams = true
       bot1 = double('bot', :name => "bot1")
       bot2 = double('bot', :name => "bot1")
       @instance.add_bots(bot1, bot2)

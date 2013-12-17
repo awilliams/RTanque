@@ -16,6 +16,10 @@ module RTanque
       @stopped = false
     end
 
+    def teams=(bool)
+      @teams = bool
+    end
+
     def max_ticks_reached?
       self.max_ticks && self.ticks >= self.max_ticks
     end
