@@ -26,6 +26,8 @@ module RTanque
         super(@arena.width, @arena.height, false, UPDATE_INTERVAL)
         self.caption = self.class.name.split('::').first
         @background = Gosu::Image.new(self, Gui.resource_path("images/grass.png"))
+
+        @draw_procs = []
       end
 
       def update
@@ -46,6 +48,16 @@ module RTanque
         self.gui_bots.draw
         self.gui_shells.draw
         self.gui_explosions.draw
+
+        @draw_procs.each do |proc|
+          proc.call self
+        end
+
+        @draw_procs.clear
+      end
+
+      def add_draw_proc &b
+        @draw_procs << b
       end
     end
   end
