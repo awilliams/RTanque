@@ -11,8 +11,11 @@ Sound difficult or time consuming? It's not! Check out the included sample tank 
 
 This is not an original idea, see [influences](https://github.com/awilliams/RTanque#influences). There's a lot of resources out there around tank design and tactics that could be applied to RTanque.
 
-How does it look? Here's a [video](https://www.youtube.com/watch?v=G7i5X8pI6dk&hd=1) and screenshot of the game:
-![Battle](https://raw.github.com/awilliams/RTanque/master/screenshots/battle_1.png)
+How does it look? Here's a video of a battle:
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=UPBqwOgGlVY
+" target="_blank"><img src="http://img.youtube.com/vi/UPBqwOgGlVY/0.jpg" 
+alt="RTanque Demo" width="640" height="480" border="10" /></a>
 
 #### Influences
 RTanque is based on the Java project [Robocode](http://robocode.sourceforge.net/) and inspired by other Ruby ports. Thanks and credit go to them both.
