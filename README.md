@@ -3,6 +3,8 @@
 **What is this?**
 RTanque is a game for ( *Ruby* ) programmers. Players program the brain of a tank and then send their tank+brain into battle with other tanks. All tanks are otherwise equal.
 
+[Getting started guide](http://awilliams.github.io/articles/rtanque-getting-started/)
+
 Rules of the game are simple: Last bot standing wins. Gameplay is also pretty simple. Each tank has a **base**, **turret** and **radar**, each of which rotate independently. The base moves the tank, the turret has a gun mounted to it which can fire at other tanks, and the radar detects other tanks in its field of vision.
 
 Have fun competing against friends' tanks or the sample ones included. Maybe you'll start a small league at your local Ruby meetup. CLI provides easy way to download bots from gists.
