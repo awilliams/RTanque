@@ -91,7 +91,9 @@ At some point you'll want to compete against other bots, or maybe you'll even or
 Ask your friends to upload their bot(s) in a [gist](https://gist.github.com/), which you can then download with the following command:
 
     bundle exec rtanque get_gist <gist_id> ...
-    # Download Marksman
+
+For example, to download [Marksman](https://gist.github.com/SteveRidout/5909793)
+    
     bundle exec rtanque get_gist 5909793
     
 If you'd like to publicly share your bot, post its gist id on the wiki https://github.com/awilliams/RTanque/wiki/bot-gists
