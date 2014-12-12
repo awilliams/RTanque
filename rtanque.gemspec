@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
 
 Rules of the game are simple: Last bot standing wins. Gameplay is also pretty simple. Each tank has a base, turret and radar, each of which rotate independently. The base moves the tank, the turret has a gun mounted to it which can fire at other tanks, and the radar detects other tanks in its field of vision.
 
-Have fun competing against friends' tanks or the sample ones included. Maybe you'll start a small league at your local Ruby meetup.} 
+Have fun competing against friends' tanks or the sample ones included. Maybe you'll start a small league at your local Ruby meetup.}
   gem.homepage      = "https://github.com/awilliams/RTanque"
   gem.license       = 'MIT'
 
@@ -22,7 +22,7 @@ Have fun competing against friends' tanks or the sample ones included. Maybe you
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'gosu', '~> 0.7.45'
+  gem.add_dependency 'gosu', '~> 0.8.6'
   gem.add_dependency 'configuration', '~> 1.3.2'
   gem.add_dependency 'octokit', '~> 2.7.0'
   gem.add_dependency 'thor', '~> 0.17.0'
