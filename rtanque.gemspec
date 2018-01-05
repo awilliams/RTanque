@@ -23,9 +23,9 @@ Have fun competing against friends' tanks or the sample ones included. Maybe you
   gem.require_paths = ["lib"]
 
   gem.add_dependency 'gosu', '~> 0.13.1'
-  gem.add_dependency 'configuration', '~> 1.3.2'
-  gem.add_dependency 'octokit', '~> 2.7.0'
-  gem.add_dependency 'thor', '~> 0.17.0'
+  gem.add_dependency 'configuration', '~> 1.3.4'
+  gem.add_dependency 'octokit', '~> 4.8.0'
+  gem.add_dependency 'thor', '~> 0.20.0'
   gem.add_dependency 'texplay', '>= 0.4.4pre'
 
   gem.add_development_dependency 'pry'
