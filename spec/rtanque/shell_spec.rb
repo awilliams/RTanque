@@ -17,9 +17,9 @@ describe RTanque::Shell do
 
     it 'shell should be dead after hit' do
       bots = [mockbot(10, 10, 'deadbot')]
-      expect(shell.dead?).to be_false
+      expect(shell.dead?).to be_falsey
       shell.hits(bots)
-      expect(shell.dead?).to be_true
+      expect(shell.dead?).to be_truthy
     end
 
     it 'should hit shell on bot radius' do

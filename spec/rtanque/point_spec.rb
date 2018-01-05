@@ -19,7 +19,7 @@ describe RTanque::Point do
   context '#initialize' do
     it 'should be frozen' do
       a = described_class.new(10, 10, @arena)
-      expect(a.frozen?).to be_true
+      expect(a.frozen?).to be_truthy
     end
 
     it 'should not allow modification' do
@@ -83,15 +83,15 @@ describe RTanque::Point do
     it 'is true when x & y are equal' do
       a = described_class.new(1, 1, @arena)
       b = described_class.new(1, 1, @arena)
-      expect(a == b).to be_true
-      expect(b == a).to be_true
+      expect(a == b).to be_truthy
+      expect(b == a).to be_truthy
     end
 
     it 'is not true when x & y are equal' do
       a = described_class.new(2, 1, @arena)
       b = described_class.new(1, 1, @arena)
-      expect(a == b).to be_false
-      expect(b == a).to be_false
+      expect(a == b).to be_falsey
+      expect(b == a).to be_falsey
     end
   end
 
@@ -165,32 +165,32 @@ describe RTanque::Point do
 
     it 'correctly detects equal points' do
       @b = @a.clone
-      expect(@a.within_radius?(@b, 1)).to be_true
+      expect(@a.within_radius?(@b, 1)).to be_truthy
     end
 
     it 'correctly detects point 1 to left' do
       @b = described_class.new(4, 5, @arena)
-      expect(@a.within_radius?(@b, 1)).to be_true
+      expect(@a.within_radius?(@b, 1)).to be_truthy
     end
 
     it 'correctly detects point 1 to right' do
       @b = described_class.new(6, 5, @arena)
-      expect(@a.within_radius?(@b, 1)).to be_true
+      expect(@a.within_radius?(@b, 1)).to be_truthy
     end
 
     it 'correctly detects point 1 above' do
       @b = described_class.new(5, 6, @arena)
-      expect(@a.within_radius?(@b, 1)).to be_true
+      expect(@a.within_radius?(@b, 1)).to be_truthy
     end
 
     it 'correctly detects point 1 below' do
       @b = described_class.new(5, 4, @arena)
-      expect(@a.within_radius?(@b, 1)).to be_true
+      expect(@a.within_radius?(@b, 1)).to be_truthy
     end
 
     it 'correctly detects point 1 NE' do
       @b = described_class.new(6, 6, @arena)
-      expect(@a.within_radius?(@b, 1)).to be_false
+      expect(@a.within_radius?(@b, 1)).to be_falsey
     end
   end
 end
