@@ -33,7 +33,7 @@ RTanque is based on the Java project [Robocode](http://robocode.sourceforge.net/
 ## Requirements
 
  * The [Gosu](https://github.com/jlnr/gosu) library used for rendering has some dependencies. Use the [Gosu getting started](https://github.com/jlnr/gosu/wiki/Getting-Started-on-Linux) to resolve any for your system.
- * Ruby 2.0.0 or 1.9.3 (tested on 1.8.7 and 1.9.2)
+ * Ruby 2.2 or later (also tested on earlier versions)
 
 ## Quick Start
 
