@@ -7,8 +7,10 @@
 # * {RTanque::Bot::Command} Instance provided to {RTanque::Bot::Brain#command}
 # * {RTanque::Heading} Handles angles
 # * {RTanque::Point} Handles coordinates
-module RTanque
+require 'chamber'
 
+module RTanque
+  Chamber.load basepath: '.', namespaces: { environment: 'battle' }
 end
 
 require 'rtanque/version'

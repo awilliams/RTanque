@@ -14,6 +14,10 @@ module RTanque
     # @param [*match_args] args provided to {RTanque::Match#initialize}
     def initialize(width, height, *match_args)
       @match = RTanque::Match.new(RTanque::Arena.new(width, height), *match_args)
+      Chamber.env.bots.each do |bot|
+        puts ">> #{bot}"
+        add_brain_path(bot)
+      end
     end
 
     # Attempts to load given {RTanque::Bot::Brain} given its path
@@ -27,10 +31,10 @@ module RTanque
 
     # Starts the match
     # @param [Boolean] gui if false, runs headless match
-    def start(gui = true)
-      if gui
-        require 'rtanque/gui'
-        window = RTanque::Gui::Window.new(self.match)
+    def start(gui = '')
+      if gui != ''
+        require 'rtanque/gosu'
+        window = RTanque::Gosu::Window.new(self.match)
         trap(:INT) { window.close }
         window.show
       else

@@ -24,7 +24,7 @@ LONGDESC
   method_option :height, :aliases => '-h', :default => 700, :type => :numeric, :banner => 'height of window'
   method_option :max_ticks, :aliases => '-m', :default => Float::INFINITY, :type => :numeric, :banner => 'max ticks allowed per match'
   method_option :teams, :default => false, :type => :boolean, :banner => 'true to do a team based match based on tank names'
-  method_option :gui, :default => true, :type => :boolean, :banner => 'false to run headless'
+  method_option :gui, :default => '', :type => :string, :banner => 'gui library'
   method_option :gc, :default => true, :type => :boolean, :banner => 'disable GC (EXPERIMENTAL)'
   method_option :quiet, :aliases => '-q', :default => false, :type => :boolean, :banner => 'disable chatter'
   method_option :seed, :default => Kernel.srand, :type => :numeric, :banner => 'random number seed value'
@@ -98,12 +98,12 @@ LONGDESC
   def download_gist(gist_id, options)
     client = Octokit::Client.new
     begin
-      gist = client.gist(gist_id)
+      gistt = client.gist(gist_id)
     rescue Octokit::NotFound
       puts set_color("Error! Gist #{gist_id} not found. Please ensure the gist id is correct.", :red)
     else
-      gist.files.attrs.each do |name, gist_file|
-        gist_path = "#{BOT_DIR}/#{gist.user.login}.#{gist_id}/#{name}"
+      gistt.files.attrs.each do |name, gist_file|
+        gist_path = "#{BOT_DIR}/#{gistt.user.login}.#{gist_id}/#{name}"
         create_file(gist_path, gist_file.content, options)
       end
     end
