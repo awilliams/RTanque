@@ -103,7 +103,7 @@ LONGDESC
       puts set_color("Error! Gist #{gist_id} not found. Please ensure the gist id is correct.", :red)
     else
       gist.files.attrs.each do |name, gist_file|
-        gist_path = "#{BOT_DIR}/#{gist.user.login}.#{gist_id}/#{name}"
+        gist_path = "#{BOT_DIR}/#{gist.owner.login}.#{gist_id}/#{name}"
         create_file(gist_path, gist_file.content, options)
       end
     end

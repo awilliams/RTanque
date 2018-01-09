@@ -12,19 +12,19 @@ describe RTanque::Match do
   it 'should allow adding bots' do
     bot = double('bot')
     @instance.add_bots(bot)
-    expect(@instance.bots.include?(bot)).to be_true
+    expect(@instance.bots.include?(bot)).to be_truthy
   end
 
   describe '#finished?' do
     it 'should be true if one or less bots left' do
-      expect(@instance.finished?).to be_true
+      expect(@instance.finished?).to be_truthy
     end
 
     it 'should be false if two or more bots left' do
       bot1 = double('bot', :name => "bot1")
       bot2 = double('bot', :name => "bot2")
       @instance.add_bots(bot1, bot2)
-      expect(@instance.finished?).to be_false
+      expect(@instance.finished?).to be_falsey
     end
 
     it 'should be true if two or more bots left w/ same name' do
@@ -32,7 +32,7 @@ describe RTanque::Match do
       bot1 = double('bot', :name => "bot1")
       bot2 = double('bot', :name => "bot1")
       @instance.add_bots(bot1, bot2)
-      expect(@instance.finished?).to be_true
+      expect(@instance.finished?).to be_truthy
     end
   end
 

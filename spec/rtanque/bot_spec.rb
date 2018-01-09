@@ -6,12 +6,12 @@ describe RTanque::Bot do
 
   context '#dead?' do
     it 'should not initially be dead' do
-      expect(bot.dead?).to be_false
+      expect(bot.dead?).to be_falsey
     end
 
     it 'should be true if health is below min' do
       bot.health = RTanque::Configuration.bot.health.min - 1
-      expect(bot.dead?).to be_true
+      expect(bot.dead?).to be_truthy
     end
   end
 

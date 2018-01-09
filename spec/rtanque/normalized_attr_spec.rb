@@ -8,7 +8,7 @@ describe RTanque::NormalizedAttr do
       described_class::AttrContainer.new(1..5)
     end
     let(:attached_instance) do
-      mock('some_object')
+      double('some_object')
     end
 
     it 'has -infinity as max_delta' do
@@ -33,13 +33,11 @@ describe RTanque::NormalizedAttr do
       described_class::AttrContainer.new(0..5, lambda{ |attached| attached.max_delta })
     end
     let(:attached_instance) do
-      mock('some_object', :max_delta => 0.1)
+      double('some_object', :max_delta => 0.1)
     end
 
     it 'should call block for max_delta' do
-      attached = mock('some_object')
-      attached.should_receive(:max_delta).and_return(0.1)
-      expect(instance.max_delta(attached)).to eq 0.1
+      expect(instance.max_delta(attached_instance)).to eq 0.1
     end
 
     it 'does not allow a change greater than given delta' do

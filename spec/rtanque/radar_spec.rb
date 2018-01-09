@@ -15,12 +15,12 @@ describe RTanque::Bot::Radar do
 
     it 'should return an empty array' do
       radar.scan([])
-      expect(radar.empty?).to be_true
+      expect(radar.empty?).to be_truthy
     end
 
     it 'should 1 Reflection' do
       radar.scan([mockbot(10, 20)])
-      expect(radar).to have(1).reflections
+      expect(radar.instance_variable_get(:@reflections).size).to eq 1
       expect(radar.first).to be_an_instance_of described_class::Reflection
     end
 
@@ -32,7 +32,7 @@ describe RTanque::Bot::Radar do
     it 'should clear self' do
       radar.scan([mockbot(10, 20, 'otherbot')])
       radar.scan([])
-      expect(radar.empty?).to be_true
+      expect(radar.empty?).to be_truthy
     end
 
     it 'reflections should be correct' do
@@ -57,7 +57,7 @@ describe RTanque::Bot::Radar do
       y = 10 + Math.cos(RTanque::Bot::Radar::VISION_RANGE.last) * 10
       bots = [mockbot(x, y, 'border')]
       radar.scan(bots)
-      expect(radar.to_a).to have(1).reflections
+      expect(radar.instance_variable_get(:@reflections).size).to eq 1
     end
 
     it 'should detect point on min vision range' do
@@ -65,7 +65,7 @@ describe RTanque::Bot::Radar do
       y = 10 + Math.cos(RTanque::Bot::Radar::VISION_RANGE.first) * 10
       bots = [mockbot(x, y, 'border')]
       radar.scan(bots)
-      expect(radar.to_a).to have(1).reflections
+      expect(radar.instance_variable_get(:@reflections).size).to eq 1
     end
 
     it 'should not detect point outside max vision range' do
@@ -73,7 +73,7 @@ describe RTanque::Bot::Radar do
       y = 10 + Math.cos(RTanque::Bot::Radar::VISION_RANGE.last) * 10
       bots = [mockbot(x + 0.01, y, 'border')]
       radar.scan(bots)
-      expect(radar.to_a).to have(0).reflections
+      expect(radar.instance_variable_get(:@reflections).size).to eq 0
     end
 
     it 'should not detect point outside max vision range' do
@@ -81,7 +81,7 @@ describe RTanque::Bot::Radar do
       y = 10 + Math.cos(RTanque::Bot::Radar::VISION_RANGE.first) * 10
       bots = [mockbot(x, y - 0.01, 'border')]
       radar.scan(bots)
-      expect(radar.to_a).to have(0).reflections
+      expect(radar.instance_variable_get(:@reflections).size).to eq 0
     end
   end
 end
