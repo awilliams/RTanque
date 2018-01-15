@@ -98,12 +98,12 @@ LONGDESC
   def download_gist(gist_id, options)
     client = Octokit::Client.new
     begin
-      gistt = client.gist(gist_id)
+      gist = client.gist(gist_id)
     rescue Octokit::NotFound
       puts set_color("Error! Gist #{gist_id} not found. Please ensure the gist id is correct.", :red)
     else
-      gistt.files.attrs.each do |name, gist_file|
-        gist_path = "#{BOT_DIR}/#{gistt.user.login}.#{gist_id}/#{name}"
+      gist.files.attrs.each do |name, gist_file|
+        gist_path = "#{BOT_DIR}/#{gist.owner.login}.#{gist_id}/#{name}"
         create_file(gist_path, gist_file.content, options)
       end
     end
