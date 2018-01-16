@@ -13,9 +13,16 @@ module RTanque
     # @param [Integer] height
     # @param [*match_args] args provided to {RTanque::Match#initialize}
     def initialize(width, height, *match_args)
+      begin
+        require "rtanque/#{Chamber.env.screen}"
+        @screen = Object.const_get("RTanque::#{classify Chamber.env.screen}")
+      rescue ::LoadError
+        puts "Failed to load screen #{Chamber.env.screen}"
+        exit 1
+      end
+
       @match = RTanque::Match.new(RTanque::Arena.new(width, height), *match_args)
       Chamber.env.bots.each do |bot|
-        puts ">> #{bot}"
         add_brain_path(bot)
       end
     end
@@ -31,16 +38,8 @@ module RTanque
 
     # Starts the match
     # @param [Boolean] gui if false, runs headless match
-    def start(gui = '')
-      if gui != ''
-        require 'rtanque/gosu'
-        window = RTanque::Gosu::Window.new(self.match)
-        trap(:INT) { window.close }
-        window.show
-      else
-        trap(:INT) { self.match.stop }
-        self.match.start
-      end
+    def start
+      @screen.new(self.match).run
     end
 
     protected
@@ -87,6 +86,10 @@ module RTanque
         multiplier = m[2].to_i
       }
       ParsedBrainPath.new(path, multiplier)
+    end
+
+    def classify snake
+      snake.split('_').collect!{|w| w.capitalize}.join
     end
   end
 end
