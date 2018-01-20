@@ -7,8 +7,6 @@
 # * {RTanque::Bot::Command} Instance provided to {RTanque::Bot::Brain#command}
 # * {RTanque::Heading} Handles angles
 # * {RTanque::Point} Handles coordinates
-require 'chamber'
-
 module RTanque
 end
 
