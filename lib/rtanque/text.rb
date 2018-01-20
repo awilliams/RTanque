@@ -15,7 +15,7 @@ module RTanque
             bot.name,
             bot.position.x,
             bot.position.y,
-            closest_shell(bot, @match.shells),
+            shells(bot, @match.shells),
             health(bot)
           ]
         end
@@ -26,7 +26,7 @@ module RTanque
 
     private
 
-    def closest_shell bot, shells
+    def shells bot, shells
       distances = shells.map do |shell|
         (shell.position.distance(bot.position)/20).to_i
       end.select { |distance| distance < 20 }.sort
