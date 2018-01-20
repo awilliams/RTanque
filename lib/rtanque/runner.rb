@@ -12,19 +12,20 @@ module RTanque
     # @param [Integer] width
     # @param [Integer] height
     # @param [*match_args] args provided to {RTanque::Match#initialize}
-    def initialize(width, height, *match_args)
+    def initialize(
+        width:, height:,
+        screen: 'silent',
+        max_ticks: nil, teams: nil
+    )
       begin
-        require "rtanque/#{Chamber.env.screen}"
-        @screen = Object.const_get("RTanque::#{classify Chamber.env.screen}")
+        require "rtanque/#{screen}"
+        @screen = Object.const_get("RTanque::#{classify screen}")
       rescue ::LoadError
-        puts "Failed to load screen #{Chamber.env.screen}"
+        puts "Failed to load screen #{screen}"
         exit 1
       end
 
-      @match = RTanque::Match.new(RTanque::Arena.new(width, height), *match_args)
-      Chamber.env.bots.each do |bot|
-        add_brain_path(bot)
-      end
+      @match = RTanque::Match.new(RTanque::Arena.new(width, height), max_ticks, teams)
     end
 
     # Attempts to load given {RTanque::Bot::Brain} given its path
@@ -37,7 +38,6 @@ module RTanque
     end
 
     # Starts the match
-    # @param [Boolean] gui if false, runs headless match
     def start
       @screen.new(self.match).run
     end

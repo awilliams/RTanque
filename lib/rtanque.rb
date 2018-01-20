@@ -10,7 +10,6 @@
 require 'chamber'
 
 module RTanque
-  Chamber.load basepath: '.', namespaces: { environment: 'battle' }
 end
 
 require 'rtanque/version'
