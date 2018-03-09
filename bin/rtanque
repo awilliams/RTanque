@@ -4,10 +4,13 @@ require 'thor'
 require 'rtanque'
 require 'rtanque/runner'
 require 'octokit'
+require 'chamber'
 
 class RTanqueCLI < Thor
   include Thor::Actions
-  BOT_DIR = 'bots'
+  Chamber.load basepath: '.', namespaces: { environment: 'battle' }
+  BOT_DIR = Chamber.env['bot_dir'] || 'bots'
+
   source_root(File.expand_path('../../', __FILE__))
 
   desc "start <path_to_brain> <path_to_brain>:x3 ...", "Starts match with given bots"
@@ -24,13 +27,19 @@ LONGDESC
   method_option :height, :aliases => '-h', :default => 700, :type => :numeric, :banner => 'height of window'
   method_option :max_ticks, :aliases => '-m', :default => Float::INFINITY, :type => :numeric, :banner => 'max ticks allowed per match'
   method_option :teams, :default => false, :type => :boolean, :banner => 'true to do a team based match based on tank names'
-  method_option :gui, :default => true, :type => :boolean, :banner => 'false to run headless'
   method_option :gc, :default => true, :type => :boolean, :banner => 'disable GC (EXPERIMENTAL)'
   method_option :quiet, :aliases => '-q', :default => false, :type => :boolean, :banner => 'disable chatter'
   method_option :seed, :default => Kernel.srand, :type => :numeric, :banner => 'random number seed value'
   def start(*brain_paths)
     Kernel.srand(options[:seed])
-    runner = RTanque::Runner.new(options[:width], options[:height], options[:max_ticks], options[:teams])
+    runner = RTanque::Runner.new(
+      width: options[:width],
+      height: options[:height],
+      screen: Chamber.env['screen'],
+      max_ticks: options[:max_ticks],
+      teams: options[:teams]
+    )
+    brain_paths = Chamber.env.bots if brain_paths.length == 0
     brain_paths.each { |brain_path|
       begin
         runner.add_brain_path(brain_path)
@@ -40,8 +49,16 @@ LONGDESC
       end
     }
     self.print_start_banner(runner) unless options[:quiet]
-    self.set_gc(options[:gc]) { runner.start(options[:gui]) }
+    self.set_gc(options[:gc]) { runner.start }
     self.print_runner_stats(runner) unless options[:quiet]
+  end
+
+  desc "init", "Initialize RTanque"
+  long_desc <<-LONGDESC
+Helper to set up an example configuration file
+LONGDESC
+  def init
+    template('templates/settings.yml', 'settings.yml')
   end
 
   desc "new_bot <bot_name>", "Creates a new bot"

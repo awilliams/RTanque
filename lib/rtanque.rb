@@ -8,7 +8,6 @@
 # * {RTanque::Heading} Handles angles
 # * {RTanque::Point} Handles coordinates
 module RTanque
-
 end
 
 require 'rtanque/version'
