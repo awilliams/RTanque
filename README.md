@@ -1,3 +1,7 @@
+# Note
+
+This version is currently in development and may not work as expected. Also, the documentation below is almost certainly out of date.
+
 # RTanque [![Build Status](https://travis-ci.org/awilliams/RTanque.png?branch=dev)](https://travis-ci.org/awilliams/RTanque) [![CodeClimate](https://codeclimate.com/github/awilliams/RTanque.png)](https://codeclimate.com/github/awilliams/RTanque)
 
 **What is this?**
