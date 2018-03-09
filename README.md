@@ -2,6 +2,11 @@
 
 This version is currently in development and may not work as expected. Also, the documentation below is almost certainly out of date.
 
+The main difference is that the graphical interface has been extracted into a
+separate gem, [`rtanque-gosu`](https://github.com/jrmhaig/RTanque-gosu) and the
+instructions in the `README.md` file in that repository gives instructions on
+how to use it.
+
 # RTanque [![Build Status](https://travis-ci.org/awilliams/RTanque.png?branch=dev)](https://travis-ci.org/awilliams/RTanque) [![CodeClimate](https://codeclimate.com/github/awilliams/RTanque.png)](https://codeclimate.com/github/awilliams/RTanque)
 
 **What is this?**
