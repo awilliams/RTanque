@@ -9,6 +9,58 @@ how to use it.
 
 # RTanque [![Build Status](https://travis-ci.org/awilliams/RTanque.png?branch=dev)](https://travis-ci.org/awilliams/RTanque) [![CodeClimate](https://codeclimate.com/github/awilliams/RTanque.png)](https://codeclimate.com/github/awilliams/RTanque)
 
+## Screens
+
+RTanque requires a *screen* to display the battle. There are two screens
+included with the gem:
+
+* `silent` - Run silently and display a summary of the battle.
+* `text` - Show the state of the battle at each point, displaying the bots'
+           positions and health.
+
+The graphical screen using the `gosu` library has been extracted into a
+separate gem, [`rtanque-gosu`](https://github.com/jrmhaig/RTanque-gosu).
+
+To use a particular screen set the `screen` parameter in the `settings.yml`
+file:
+
+```yaml
+battle:
+  screen: gosu   # Use `gosu` to display the battle
+```
+
+### Creating a new screen
+
+To create a new screen called `my_screen` create a file
+`lib/rtanque/my_screen.rb` containing at least an `initialize` and a `run`
+method:
+
+```ruby
+# lib/rtanque/my_screen.rb
+module RTanque
+  class MyScreen
+    def initialize match
+      @match = match
+    end
+
+    def run
+      trap(:INT) { @match.stop }
+      while !@match.finished?
+        @match.tick # Move to the next frame
+
+        # Code to display the frame goes here
+        # Eg,
+        # @match.bots.each do |bot|
+        #   puts "#{bot.name} is at (#{bot.position.x}, #{bot.position.y})"
+        # end
+      end
+    end
+  end
+end
+```
+
+**Old documentation below here**
+
 **What is this?**
 RTanque is a game for ( *Ruby* ) programmers. Players program the brain of a tank and then send their tank+brain into battle with other tanks. All tanks are otherwise equal.
 
