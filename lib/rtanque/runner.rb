@@ -51,7 +51,7 @@ module RTanque
     end
 
     def fetch_brain_klasses(brain_path)
-      @load_brain_klass_cache ||= Hash.new do |cache, path|
+      @@load_brain_klass_cache ||= Hash.new do |cache, path|
         cache[path] = self.get_diff_in_object_space(RTanque::Bot::Brain) {
           begin
             require(path)
@@ -62,7 +62,7 @@ module RTanque
         raise LoadError, "No class of type #{RTanque::Bot::Brain} found in #{path}" if cache[path].empty?
         cache[path]
       end
-      @load_brain_klass_cache[brain_path]
+      @@load_brain_klass_cache[brain_path]
     end
 
     def get_diff_in_object_space(klass)
