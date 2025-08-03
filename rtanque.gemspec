@@ -26,7 +26,6 @@ Have fun competing against friends' tanks or the sample ones included. Maybe you
   gem.add_dependency 'configuration', '~> 1.3.4'
   gem.add_dependency 'octokit', '~> 4.15.0'
   gem.add_dependency 'thor', '~> 1.4.0'
-  gem.add_dependency 'texplay', '>= 0.4.4pre'
 
   gem.add_development_dependency 'pry'
   gem.add_development_dependency 'rspec', '~> 3.7.0'
