@@ -48,17 +48,17 @@ module RTanque
         x,y = *position
         x_health = health.round(0)
         health_color = color_for_health
-        @score_bar_image = Gosu::Image.from_blob(
+        score_bar_image = Gosu::Image.from_blob(
           HEALTH_BAR_WIDTH, HEALTH_BAR_HEIGHT,
           (health_color*x_health + "\0\0\0\0"*(HEALTH_BAR_WIDTH - x_health))*HEALTH_BAR_HEIGHT
         )
-        @score_bar_image.draw(x - (HEALTH_BAR_WIDTH/2) * @x_factor, y + (5 + RTanque::Bot::RADIUS) * @y_factor, ZOrder::BOT_HEALTH, @x_factor, @y_factor)
+        score_bar_image.draw(x - (HEALTH_BAR_WIDTH/2) * @x_factor, y + (5 + RTanque::Bot::RADIUS) * @y_factor, ZOrder::BOT_HEALTH, @x_factor, @y_factor)
       end
 
       private
 
       def color_for_health
-        HealthColorCalculator.new(health).color_as_rgb.map { |c| (255 * c).to_i.chr }.join + 255.chr
+        HealthColorCalculator.new(health).color_as_rgba
       end
 
       def health
