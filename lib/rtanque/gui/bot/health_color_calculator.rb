@@ -17,20 +17,21 @@ module RTanque
         def color_as_rgba
           if health > 50
             percentage = ((100 - health) / 50)
-            color_between(FULL_HEALTH_COLOR, MEDIUM_HEALTH_COLOR, percentage).map { |n| n.chr }.join
+            color_between(FULL_HEALTH_COLOR, MEDIUM_HEALTH_COLOR, percentage)
           else
             percentage = ((50 - health) / 50)
-            color_between(MEDIUM_HEALTH_COLOR, LOW_HEALTH_COLOR, percentage).map { |n| n.chr }.join
+            color_between(MEDIUM_HEALTH_COLOR, LOW_HEALTH_COLOR, percentage)
           end
         end
 
+        private
+
         def color_between(color_a, color_b, percentage)
-          [
-            (color_b[0] - color_a[0]) * percentage + color_a[0],
-            (color_b[1] - color_a[1]) * percentage + color_a[1],
-            (color_b[2] - color_a[2]) * percentage + color_a[2],
-            (color_b[3] - color_a[3]) * percentage + color_a[3]
-          ].map(&:round)
+          4.times.map { |i| graduated(color_a[i], color_b[i], percentage) }.join
+        end
+
+        def graduated(min, max, percentage)
+          ((max - min) * percentage + min).round.chr
         end
       end
     end
