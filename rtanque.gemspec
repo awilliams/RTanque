@@ -23,9 +23,11 @@ Have fun competing against friends' tanks or the sample ones included. Maybe you
   gem.require_paths = ["lib"]
 
   gem.add_dependency 'configuration', '~> 1.3.4'
-  gem.add_dependency 'octokit', '~> 4.8.0'
-  gem.add_dependency 'thor', '~> 0.20.0'
-  gem.add_dependency 'chamber', '~> 2.12.1'
+  gem.add_dependency 'octokit', '~> 10.0.0'
+  gem.add_dependency 'thor', '~> 1.4.0'
+  gem.add_dependency 'chamber', '~> 2.14.0'
+  # Required for chamber
+  gem.add_dependency 'base64', '~> 0.3.0'
 
   gem.add_development_dependency 'pry'
   gem.add_development_dependency 'rspec', '~> 3.7.0'
