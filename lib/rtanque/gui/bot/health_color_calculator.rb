@@ -3,10 +3,11 @@ module RTanque
     class Bot
       class HealthColorCalculator
 
-        # different health-colors as RGB values
-        FULL_HEALTH_COLOR   = [ 74, 190,  74, 255]
-        MEDIUM_HEALTH_COLOR = [255, 190,   0, 255]
-        LOW_HEALTH_COLOR    = [220,   0,   0, 255]
+        # Different health-colors as RGB values
+        #                      Blue, Green,Red,  Alpha
+        FULL_HEALTH_COLOR   = [0x4A, 0xBE, 0x4A, 0xFF].freeze
+        MEDIUM_HEALTH_COLOR = [0x00, 0xBE, 0xFF, 0xFF].freeze
+        LOW_HEALTH_COLOR    = [0x00, 0x00, 0xDC, 0xFF].freeze
 
         attr_reader :health
 
@@ -14,7 +15,7 @@ module RTanque
           @health = health
         end
 
-        def color_as_rgba
+        def color
           if health > 50
             percentage = ((100 - health) / 50)
             color_between(FULL_HEALTH_COLOR, MEDIUM_HEALTH_COLOR, percentage)
@@ -27,11 +28,11 @@ module RTanque
         private
 
         def color_between(color_a, color_b, percentage)
-          4.times.map { |i| graduated(color_a[i], color_b[i], percentage) }.join
+          4.times.map { |i| graduated(color_a[i], color_b[i], percentage) << (8 * i) }.sum
         end
 
         def graduated(min, max, percentage)
-          ((max - min) * percentage + min).round.chr
+          ((max - min) * percentage + min).round
         end
       end
     end

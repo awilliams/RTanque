@@ -17,6 +17,7 @@ module RTanque
         @turret_image = Gosu::Image.new(@window, Gui.resource_path("images/turret.png"))
         @radar_image = Gosu::Image.new(@window, Gui.resource_path("images/radar.png"))
         @name_font = Gosu::Font.new(@window, Window::FONT_NAME, Window::SMALL_FONT_SIZE)
+        @health_bar_image = ::Gosu::Image.new(Gui.resource_path('images/bar.png'))
         @x_factor = 1
         @y_factor = 1
       end
@@ -48,17 +49,14 @@ module RTanque
         x,y = *position
         x_health = health.round(0)
         health_color = color_for_health
-        score_bar_image = Gosu::Image.from_blob(
-          HEALTH_BAR_WIDTH, HEALTH_BAR_HEIGHT,
-          (health_color*x_health + "\0\0\0\0"*(HEALTH_BAR_WIDTH - x_health))*HEALTH_BAR_HEIGHT
-        )
-        score_bar_image.draw(x - (HEALTH_BAR_WIDTH/2) * @x_factor, y + (5 + RTanque::Bot::RADIUS) * @y_factor, ZOrder::BOT_HEALTH, @x_factor, @y_factor)
+        @health_bar_image.draw(x - ((HEALTH_BAR_WIDTH / 2) * @x_factor), y + ((5 + RTanque::Bot::RADIUS) * @y_factor),
+                              ZOrder::BOT_HEALTH, x_health / 200.0, 0.5, health_color)
       end
 
       private
 
       def color_for_health
-        HealthColorCalculator.new(health).color_as_rgba
+        HealthColorCalculator.new(health).color
       end
 
       def health
