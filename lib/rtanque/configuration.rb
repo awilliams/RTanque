@@ -1,13 +1,22 @@
 require 'configuration'
+require 'yaml'
 
 module RTanque
   one_degree = (Math::PI / 180.0)
+
+  file = File.expand_path('settings.yml', '.')
+  settings = File.exist?(file) ? YAML.load_file(file) : {}
 
   # @!visibility private
   Configuration = ::Configuration.for('default') do
     raise_brain_tick_errors true
     quit_when_finished true
 
+    match do
+      screen settings.dig('match', 'screen') || 'silent'
+      bot_dir settings.dig('match', 'bot_dir') || 'bots'
+      bots settings.dig('match', 'bots')
+    end
     bot do
       radius 19
       health_reduction_on_exception 2
