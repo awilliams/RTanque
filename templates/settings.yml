@@ -1,15 +1,16 @@
-battle:
+match:
   # Define the output method. For example.
-  #   silent : No output and just display the winner
+  #   silent : No output and just display the winner (default)
   #   text   : Display the game state at each step in text
   #   gosu   : Graphical display using the Gosu library
   #            Requires the 'rtanque-gosu' gem
-  screen: silent        # Default
+  # screen: silent
 
-  # Location of bots
-  bot_dir: bots         # Default
+  # Location of bots (default - bots)
+  # bot_dir: bots
 
   # Bots to include in the battle
-  bots:
-    - sample_bots/camper
-    - sample_bots/seek_and_destroy
+  # If this option is omitted then bots must be added on the command line
+  # bots:
+  #   - sample_bots/camper
+  #   - sample_bots/seek_and_destroy
