@@ -16,17 +16,18 @@ Rules of the game are simple: Last bot standing wins. Gameplay is also pretty si
 Have fun competing against friends' tanks or the sample ones included. Maybe you'll start a small league at your local Ruby meetup.} 
   gem.homepage      = "https://github.com/awilliams/RTanque"
   gem.license       = 'MIT'
+  gem.required_ruby_version = '>= 3.4'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'gosu', '~> 1.0.0'
+  gem.add_dependency 'gosu', '~> 1.4.6'
   gem.add_dependency 'configuration', '~> 1.3.4'
-  gem.add_dependency 'octokit', '~> 4.15.0'
+  gem.add_dependency 'octokit', '~> 10.0.0'
   gem.add_dependency 'thor', '~> 1.4.0'
 
   gem.add_development_dependency 'pry'
-  gem.add_development_dependency 'rspec', '~> 3.7.0'
+  gem.add_development_dependency 'rspec', '~> 3.13.1'
 end
