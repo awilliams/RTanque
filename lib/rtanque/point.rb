@@ -78,7 +78,7 @@ module RTanque
     end
 
     def ==(other_point)
-      self.x == other_point.x && self.y == other_point.y
+      self.class == other_point.class && self.x == other_point.x && self.y == other_point.y
     end
 
     def within_radius?(other_point, radius)
