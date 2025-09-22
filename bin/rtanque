@@ -4,12 +4,10 @@ require 'thor'
 require 'rtanque'
 require 'rtanque/runner'
 require 'octokit'
-require 'chamber'
 
 class RTanqueCLI < Thor
   include Thor::Actions
-  Chamber.load basepath: '.', namespaces: { environment: 'battle' }
-  BOT_DIR = Chamber.env['bot_dir'] || 'bots'
+  BOT_DIR = RTanque::Configuration.match.bot_dir
 
   source_root(File.expand_path('../../', __FILE__))
 
@@ -35,11 +33,11 @@ LONGDESC
     runner = RTanque::Runner.new(
       width: options[:width],
       height: options[:height],
-      screen: Chamber.env['screen'],
+      screen: RTanque::Configuration.match.screen,
       max_ticks: options[:max_ticks],
       teams: options[:teams]
     )
-    brain_paths = Chamber.env.bots if brain_paths.length == 0
+    brain_paths = RTanque::Configuration.match.bots if brain_paths.length == 0
     brain_paths.each { |brain_path|
       begin
         runner.add_brain_path(brain_path)
