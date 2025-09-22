@@ -24,6 +24,9 @@ Have fun competing against friends' tanks or the sample ones included. Maybe you
 
   gem.add_dependency 'configuration', '~> 1.3.4'
   gem.add_dependency 'octokit', '~> 10.0.0'
+  # Add faraday-retry to enforce faraday version 2.0 or greater and enable retry middleware in octokit
+  # See https://github.com/octokit/octokit.rb/commit/94925391160987c74bd0e4dcc221255e1f0ba842
+  gem.add_dependency 'faraday-retry', '~> 2.3.2'
   gem.add_dependency 'thor', '~> 1.4.0'
 
   gem.add_development_dependency 'pry'
